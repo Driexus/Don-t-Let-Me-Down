@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour
@@ -8,8 +6,8 @@ public class Map : MonoBehaviour
     private int tilemapIndex;
     private Tilemap[] tilemaps;
     private int tilemapCount;
-    public Player player;
     public GameObject floor;
+    public TileBase EndTile;
 
     public Tilemap ActiveTilemap
     {
@@ -49,11 +47,4 @@ public class Map : MonoBehaviour
 
         tilemaps[tilemapIndex].gameObject.SetActive(true);
     }
-
-    public void CheckFloor()
-    {
-        if (!player.HasTileUnderneath)
-            floor.SetActive(false);
-    }
-
 }
