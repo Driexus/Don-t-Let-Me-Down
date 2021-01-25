@@ -9,6 +9,7 @@ public class Map : MonoBehaviour
     private Tilemap[] tilemaps;
     private int tilemapCount;
     public Player player;
+    public GameObject floor;
 
     public Tilemap ActiveTilemap
     {
@@ -25,12 +26,6 @@ public class Map : MonoBehaviour
         
         for (int i = 0; i < tilemapCount; i++)
             tilemaps[i] = transform.GetChild(i).GetComponent<Tilemap>();
-    }
-
-    private void Start()
-    {
-        tilemaps[0].gameObject.SetActive(true);
-        tilemapIndex = 0;
     }
 
     public void NextTilemap()
@@ -57,8 +52,8 @@ public class Map : MonoBehaviour
 
     public void CheckFloor()
     {
-        if (!player.HasFloor)
-            transform.parent.gameObject.GetComponent<Collider>().enabled = false;
+        if (!player.HasTileUnderneath)
+            floor.SetActive(false);
     }
 
 }
