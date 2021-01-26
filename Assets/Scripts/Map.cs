@@ -5,7 +5,6 @@ public class Map : MonoBehaviour
 {
     private int tilemapIndex;
     private Tilemap[] tilemaps;
-    private int tilemapCount;
     public GameObject floor;
     public TileBase EndTile;
 
@@ -17,9 +16,16 @@ public class Map : MonoBehaviour
         }
     }
 
+    public int tilemapCount
+    {
+        get
+        {
+            return transform.childCount;
+        }
+    }
+
     private void Awake()
     {
-        tilemapCount = transform.childCount;
         tilemaps = new Tilemap[tilemapCount];
         
         for (int i = 0; i < tilemapCount; i++)
