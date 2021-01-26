@@ -32,15 +32,20 @@ public class Map : MonoBehaviour
             tilemaps[i] = transform.GetChild(i).GetComponent<Tilemap>();
     }
 
+    private void Start()
+    {
+        tilemaps[0].GetComponent<Animator>().SetTrigger("FadeIn");
+    }
+
     public void NextTilemap()
     {
-        tilemaps[tilemapIndex].gameObject.SetActive(false);
+        tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeOut");
         tilemapIndex++;
         
         if (tilemapIndex >= tilemapCount)
             tilemapIndex = 0;
 
-        tilemaps[tilemapIndex].gameObject.SetActive(true);
+        tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeIn");
     }
 
     public void PreviousTilemap()

@@ -4,6 +4,8 @@ public class Player : MonoBehaviour
 {
     public Map map;
     public Vector3 Offset;
+    public Animator playerAnimator;
+    public GameManager GM;
 
     public bool HasTileUnderneath
     {
@@ -26,5 +28,12 @@ public class Player : MonoBehaviour
     {
         if (map.ActiveTilemap.HasTile(coords))
             transform.position = map.ActiveTilemap.CellToWorld(coords) + Offset;
+        else
+        {
+            GM.ResetTimer();
+            transform.position = map.ActiveTilemap.CellToWorld(coords) + Offset;
+            map.NextTilemap();
+        }
+
     }
 }
