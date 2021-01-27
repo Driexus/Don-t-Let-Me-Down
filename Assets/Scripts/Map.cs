@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections;
 
 public class Map : MonoBehaviour
 {
@@ -32,11 +33,6 @@ public class Map : MonoBehaviour
             tilemaps[i] = transform.GetChild(i).GetComponent<Tilemap>();
     }
 
-    private void Start()
-    {
-        tilemaps[0].GetComponent<Animator>().SetTrigger("FadeIn");
-    }
-
     public void NextTilemap()
     {
         tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeOut");
@@ -48,14 +44,21 @@ public class Map : MonoBehaviour
         tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeIn");
     }
 
-    public void PreviousTilemap()
+    public void LoadFirstTilemap()
     {
-        tilemaps[tilemapIndex].gameObject.SetActive(false);
-        tilemapIndex--;
-
-        if (tilemapIndex < 0)
-            tilemapIndex = tilemapCount - 1;
-
-        tilemaps[tilemapIndex].gameObject.SetActive(true);
+        if (tilemapIndex > 0)
+            tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeOut");
+        
+        tilemapIndex = 0;
+        if (tilemaps[tilemapIndex].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AlphaZero"))
+            tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeIn");
     }
+
+    public bool ActiveTilemapHasLoaded
+    {
+        get
+        {
+            return tilemaps[tilemapIndex].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AlphaOne");
+        }
+    }   
 }

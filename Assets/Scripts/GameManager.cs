@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public Player player;
     public Map map;
-    public EventSystem eventSystem;
 
     public GameObject StartingTile;
 
@@ -18,12 +17,33 @@ public class GameManager : MonoBehaviour
     public int ActiveTime;
     public TMP_Text textTimer;
     private IEnumerator timer = null;
+    private IEnumerator memorizationPhase;
+
+    public GameObject WonScreen;
+    public Button skipButton;
+    public CanvasGroup moveButtons;
 
     private void Start()
     {
-        StartCoroutine(AlternateTilemaps());
+        map.LoadFirstTilemap();
+        memorizationPhase = AlternateTilemaps();
+        StartCoroutine(memorizationPhase);
     }
 
+    private IEnumerator StartGamePhase()
+    {
+        while (!map.ActiveTilemapHasLoaded)
+            yield return null;
+        
+        skipButton.enabled = false;
+        StartingTile.SetActive(false);
+        moveButtons.interactable = true;
+        StartTimer();
+    }
+
+
+    // Checks if the player has a tile underneath or if he has won
+    // Should get called after every movement
     public void CheckState()
     {
         if (!player.HasTileUnderneath)
@@ -35,6 +55,7 @@ public class GameManager : MonoBehaviour
         else if (map.ActiveTilemap.GetTile(player.GridPosition) == map.EndTile)
         {
             StopTimer();
+            WonScreen.SetActive(true);
             Debug.Log("Won");
             StartCoroutine(ReloadLevel());
         }
@@ -42,24 +63,38 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator ReloadLevel()
     {
-        eventSystem.enabled = false;
-        yield return new WaitForSeconds(2f);
+        moveButtons.interactable = false;
+        yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public IEnumerator AlternateTilemaps()
+    private IEnumerator AlternateTilemaps()
     {
         for (int i = 0; i < Repeats; i++)
         {
             for (int j = 0; j < map.tilemapCount; j++)
-            {
+            {                
                 yield return new WaitForSeconds(AlterTime);
                 map.NextTilemap();
             }
         }
-        StartingTile.SetActive(false);
-        StartTimer();
+        StartCoroutine(StartGamePhase());
     }
+
+    public void SkipMemorizationPhase()
+    {
+        if (memorizationPhase != null)
+        {
+            StopCoroutine(memorizationPhase);
+            map.LoadFirstTilemap();
+            StartCoroutine(StartGamePhase());
+        }
+    }    
+
+
+    /// <summary>
+    /// Timer Logic
+    /// </summary>
 
     private IEnumerator CountSeconds()
     {
