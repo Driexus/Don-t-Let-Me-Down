@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 public class Movement : MonoBehaviour
 {
     public Player player;
@@ -10,17 +9,17 @@ public class Movement : MonoBehaviour
 
     public void MoveToDirection()
     {
-        Vector3Int targetTile = player.GridPosition;
+        Vector3Int playerDirection = new Vector3Int() ;
 
         if (direction == Direction.Forward)
-            targetTile += new Vector3Int(0, 1, 0);
+            playerDirection = Vector3Int.up;
         else if (direction == Direction.Backward)
-            targetTile += new Vector3Int(0, -1, 0);
+            playerDirection = Vector3Int.down;
         else if (direction == Direction.Right)
-            targetTile += new Vector3Int(1, 0, 0);
+            playerDirection = Vector3Int.right;
         else if (direction == Direction.Left)
-            targetTile += new Vector3Int(-1, 0, 0);
+            playerDirection = Vector3Int.left;
 
-        player.MoveToTile(targetTile);
+        player.MoveToDirection(playerDirection);
     }
 }

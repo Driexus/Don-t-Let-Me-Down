@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public Button skipButton;
     public CanvasGroup moveButtons;
 
+    public Animator transition;
+
     private void Start()
     {
         map.LoadFirstTilemap();
@@ -64,6 +66,8 @@ public class GameManager : MonoBehaviour
     public IEnumerator ReloadLevel()
     {
         moveButtons.interactable = false;
+        transition.speed = 0.4f;
+        transition.SetTrigger("ChangeScene");
         yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene("MainMenu");
     }
