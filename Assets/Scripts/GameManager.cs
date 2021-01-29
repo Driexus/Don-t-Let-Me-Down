@@ -34,10 +34,11 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartGamePhase()
     {
+        skipButton.enabled = false;
         while (!map.ActiveTilemapHasLoaded)
             yield return null;
         
-        skipButton.enabled = false;
+
         StartingTile.SetActive(false);
         moveButtons.interactable = true;
         StartTimer();

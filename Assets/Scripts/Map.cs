@@ -28,7 +28,7 @@ public class Map : MonoBehaviour
     private void Awake()
     {
         tilemaps = new Tilemap[tilemapCount];
-        
+
         for (int i = 0; i < tilemapCount; i++)
             tilemaps[i] = transform.GetChild(i).GetComponent<Tilemap>();
     }
@@ -37,7 +37,7 @@ public class Map : MonoBehaviour
     {
         tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeOut");
         tilemapIndex++;
-        
+
         if (tilemapIndex >= tilemapCount)
             tilemapIndex = 0;
 
@@ -48,10 +48,13 @@ public class Map : MonoBehaviour
     {
         if (tilemapIndex > 0)
             tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeOut");
-        
+
         tilemapIndex = 0;
-        if (tilemaps[tilemapIndex].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AlphaZero"))
-            tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeIn");
+        Animator tilemapAnim = tilemaps[tilemapIndex].GetComponent<Animator>();
+        AnimatorStateInfo animInfo = tilemapAnim.GetCurrentAnimatorStateInfo(0);
+
+        if (animInfo.IsName("AlphaZero") ||  animInfo.IsName("FadeOut"))
+            tilemapAnim.SetTrigger("FadeIn");
     }
 
     public bool ActiveTilemapHasLoaded

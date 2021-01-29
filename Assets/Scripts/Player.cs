@@ -8,7 +8,14 @@ public class Player : MonoBehaviour
     public Animator playerAnimator;
     public GameManager GM;
 
+    private Vector3 playerWorldOffset;
+
     private bool mustMove = false;
+
+    private void Awake()
+    {
+        playerWorldOffset = transform.parent.position;
+    }
 
     public bool HasTileUnderneath
     {
@@ -40,7 +47,6 @@ public class Player : MonoBehaviour
         else if (direction == Vector3Int.left)
             transform.parent.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
 
-
         if (map.ActiveTilemap.HasTile(targetCoords))
         {
             StartCoroutine(MoveForSeconds(1f));
@@ -58,7 +64,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         if (mustMove)
-            transform.parent.position += transform.parent.rotation * Vector3.forward * Time.deltaTime;
+           transform.parent.position += transform.parent.localRotation * Vector3.forward * Time.deltaTime;
     }
 
     private IEnumerator MoveForSeconds(float seconds)
@@ -67,6 +73,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         mustMove = false;
         AlignWithGrid();
+        GM.CheckState();
     }
 
     private void Walk()
@@ -79,9 +86,13 @@ public class Player : MonoBehaviour
         playerAnimator.SetTrigger("Jump");
     }
 
-    // Realigns/Fixes the player position according to the grid
+
+    // Realigns/Fixes the player position according to the grid -- Fixes small errors of movement
     private void AlignWithGrid()
     {
+        Vector3Int cellPos = map.ActiveTilemap.WorldToCell(transform.position);
+        Vector3 fixedPos = map.ActiveTilemap.CellToWorld(cellPos);
 
+        transform.parent.position = fixedPos + playerWorldOffset;
     }    
 }
