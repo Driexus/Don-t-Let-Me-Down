@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +10,8 @@ public class Player : MonoBehaviour
     private Vector3 playerWorldOffset;
 
     private bool mustMove = false;
+    private float moveDuration;
+    private float timeSinceStartedMoving;
 
     private void Awake()
     {
@@ -49,13 +50,11 @@ public class Player : MonoBehaviour
 
         if (map.ActiveTilemap.HasTile(targetCoords))
         {
-            StartCoroutine(MoveForSeconds(1f));
             Walk();
         }
         else
         {
             GM.ResetTimer();
-            StartCoroutine(MoveForSeconds(1f));
             Jump();
             map.NextTilemap();
         }
@@ -64,13 +63,25 @@ public class Player : MonoBehaviour
     private void Update()
     {
         if (mustMove)
-           transform.parent.position += transform.parent.localRotation * Vector3.forward * Time.deltaTime;
+        {
+            transform.parent.position += (transform.parent.localRotation * Vector3.forward * Time.deltaTime) /moveDuration;
+            timeSinceStartedMoving += Time.deltaTime;
+
+            if (timeSinceStartedMoving >= moveDuration)
+                StopMoving();
+        }
+
     }
 
-    private IEnumerator MoveForSeconds(float seconds)
+    public void MoveForSeconds(float seconds)
     {
+        moveDuration = seconds;
+        timeSinceStartedMoving = 0f;
         mustMove = true;
-        yield return new WaitForSeconds(seconds);
+    }
+
+    private void StopMoving()
+    {
         mustMove = false;
         AlignWithGrid();
         GM.CheckState();
