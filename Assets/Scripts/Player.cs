@@ -35,31 +35,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void MoveToDirection(Vector3Int direction)
-    {
-        Vector3Int targetCoords = GridPosition + direction;
-
-        if (direction == Vector3Int.up)
-            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-        else if (direction == Vector3Int.down)
-            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
-        else if (direction == Vector3Int.right)
-            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
-        else if (direction == Vector3Int.left)
-            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
-
-        if (map.ActiveTilemap.HasTile(targetCoords))
-        {
-            Walk();
-        }
-        else
-        {
-            GM.ResetTimer();
-            Jump();
-            map.NextTilemap();
-        }
-    }
-
     private void Update()
     {
         if (mustMove)
@@ -71,6 +46,21 @@ public class Player : MonoBehaviour
                 StopMoving();
         }
 
+    }
+
+    public void MoveToDirection(Vector3Int direction)
+    {        
+        Vector3Int targetCoords = GridPosition + direction;
+        if (map.ActiveTilemap.HasTile(targetCoords))
+        {
+            Walk(direction);
+        }
+        else
+        {
+            GM.ResetTimer();
+            Jump(direction);
+            map.NextTilemap();
+        }
     }
 
     public void MoveForSeconds(float seconds)
@@ -87,16 +77,17 @@ public class Player : MonoBehaviour
         GM.CheckState();
     }
 
-    private void Walk()
+    public void Walk(Vector3Int direction)
     {
+        ApplyRotation(direction);
         playerAnimator.SetTrigger("Walk");
     }
 
-    private void Jump()
+    public void Jump(Vector3Int direction)
     {
+        ApplyRotation(direction);
         playerAnimator.SetTrigger("Jump");
     }
-
 
     // Realigns/Fixes the player position according to the grid -- Fixes small errors of movement
     private void AlignWithGrid()
@@ -105,5 +96,18 @@ public class Player : MonoBehaviour
         Vector3 fixedPos = map.ActiveTilemap.CellToWorld(cellPos);
 
         transform.parent.position = fixedPos + playerWorldOffset;
-    }    
+    }
+
+    // Changes the rotation of the player to face a given direction
+    private void ApplyRotation(Vector3Int direction)
+    {
+        if (direction == Vector3Int.up)
+            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+        else if (direction == Vector3Int.down)
+            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
+        else if (direction == Vector3Int.right)
+            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+        else if (direction == Vector3Int.left)
+            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
+    }
 }

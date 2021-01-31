@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Map map;
 
-    public GameObject StartingTile;
+    public GameObject floor;
 
     public int Repeats;
     public float AlterTime;
@@ -25,7 +25,14 @@ public class GameManager : MonoBehaviour
 
     public Animator transition;
 
+    public LevelManager lm;
+
     private void Start()
+    {
+        StartLevel();
+    }
+
+    public void StartLevel()
     {
         map.LoadFirstTilemap();
         memorizationPhase = AlternateTilemaps();
@@ -35,12 +42,13 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartGamePhase()
     {
         skipButton.enabled = false;
+        
+        map.LoadFirstTilemap();
         while (!map.ActiveTilemapHasLoaded)
             yield return null;
-        
 
-        StartingTile.SetActive(false);
-        moveButtons.interactable = true;
+        player.Jump(Vector3Int.up);
+        map.StartingTile.SetActive(false);
         StartTimer();
     }
 
@@ -51,20 +59,19 @@ public class GameManager : MonoBehaviour
     {
         if (!player.HasTileUnderneath)
         {
-            map.floor.SetActive(false);
-            StartCoroutine(ReloadLevel());
+            floor.SetActive(false);
+            StartCoroutine(LoadMainMenu());
         }
 
         else if (map.ActiveTilemap.GetTile(player.GridPosition) == map.EndTile)
         {
+            moveButtons.interactable = false;
             StopTimer();
-            WonScreen.SetActive(true);
-            Debug.Log("Won");
-            StartCoroutine(ReloadLevel());
+            lm.OnLevelCompleted();
         }
     }
 
-    public IEnumerator ReloadLevel()
+    public IEnumerator LoadMainMenu()
     {
         moveButtons.interactable = false;
         transition.speed = 0.4f;
@@ -75,14 +82,12 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator AlternateTilemaps()
     {
-        for (int i = 0; i < Repeats; i++)
-        {
-            for (int j = 0; j < map.tilemapCount; j++)
-            {                
+        for (int i = 1; i < Repeats * map.tilemapCount; i++)
+        {               
                 yield return new WaitForSeconds(AlterTime);
                 map.NextTilemap();
-            }
         }
+        yield return new WaitForSeconds(AlterTime);
         StartCoroutine(StartGamePhase());
     }
 
@@ -91,7 +96,6 @@ public class GameManager : MonoBehaviour
         if (memorizationPhase != null)
         {
             StopCoroutine(memorizationPhase);
-            map.LoadFirstTilemap();
             StartCoroutine(StartGamePhase());
         }
     }    
@@ -111,8 +115,8 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         map.ActiveTilemap.gameObject.SetActive(false);
-        map.floor.SetActive(false);
-        StartCoroutine(ReloadLevel());
+        floor.SetActive(false);
+        StartCoroutine(LoadMainMenu());
     }
 
     public void StartTimer()
