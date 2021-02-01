@@ -19,11 +19,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator timer = null;
     private IEnumerator memorizationPhase;
 
-    public GameObject WonScreen;
     public Button skipButton;
     public CanvasGroup moveButtons;
-
-    public Animator transition;
 
     public LevelManager lm;
 
@@ -34,8 +31,9 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel()
     {
+        moveButtons.interactable = false;
         map.LoadFirstTilemap();
-        memorizationPhase = AlternateTilemaps();
+        memorizationPhase = StartMemorizationPhase();
         StartCoroutine(memorizationPhase);
     }
 
@@ -57,13 +55,13 @@ public class GameManager : MonoBehaviour
     // Should get called after every movement
     public void CheckState()
     {
-        if (!player.HasTileUnderneath)
+        if (!player.HasTileUnderneath(map.ActiveTilemap))
         {
             floor.SetActive(false);
-            StartCoroutine(LoadMainMenu());
+            lm.OnLevelFailed();
         }
 
-        else if (map.ActiveTilemap.GetTile(player.GridPosition) == map.EndTile)
+        else if (map.ActiveTilemap.GetTile(player.GridPosition(map.ActiveTilemap)) == map.EndTile)
         {
             moveButtons.interactable = false;
             StopTimer();
@@ -71,17 +69,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator LoadMainMenu()
+    private IEnumerator StartMemorizationPhase()
     {
-        moveButtons.interactable = false;
-        transition.speed = 0.4f;
-        transition.SetTrigger("ChangeScene");
-        yield return new WaitForSeconds(2.5f);
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    private IEnumerator AlternateTilemaps()
-    {
+        textTimer.text = "Skip";
+        skipButton.enabled = true;
         for (int i = 1; i < Repeats * map.tilemapCount; i++)
         {               
                 yield return new WaitForSeconds(AlterTime);
@@ -116,7 +107,7 @@ public class GameManager : MonoBehaviour
         }
         map.ActiveTilemap.gameObject.SetActive(false);
         floor.SetActive(false);
-        StartCoroutine(LoadMainMenu());
+        lm.OnLevelFailed() ;
     }
 
     public void StartTimer()
@@ -144,5 +135,5 @@ public class GameManager : MonoBehaviour
     {
         StopTimer();
         StartTimer();                 
-    }    
+    }
 }

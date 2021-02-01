@@ -8,7 +8,6 @@ public class LevelManager : MonoBehaviour
     public Player player;
     public GameObject WonScreen;
     public Animator SceneTransition;
-    public Grid gameGrid;
     public Map nextMap;
 
     public void OnLevelCompleted()
@@ -23,7 +22,6 @@ public class LevelManager : MonoBehaviour
             GM.map.gameObject.SetActive(false);
             nextMap.gameObject.SetActive(true);
             GM.map = nextMap;
-            player.map = nextMap;
             //ToDO: Fix Camera
             nextMap = null;
             GM.StartLevel();
@@ -32,10 +30,14 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator LoadMainMenu()
     {
-        ///moveButtons.interactable = false;
         SceneTransition.speed = 0.4f;
         SceneTransition.SetTrigger("ChangeScene");
         yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OnLevelFailed()
+    {
+        Debug.Log("Level Failed");
     }
 }

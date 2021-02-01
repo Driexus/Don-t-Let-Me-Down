@@ -378,6 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1118669503}
+  GM: {fileID: 763736024}
   direction: 3
 --- !u!114 &205865335
 MonoBehaviour:
@@ -522,6 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1118669503}
+  GM: {fileID: 763736024}
   direction: 1
 --- !u!114 &238270524
 MonoBehaviour:
@@ -1257,6 +1259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1118669503}
+  GM: {fileID: 763736024}
   direction: 0
 --- !u!114 &826073864
 MonoBehaviour:
@@ -1707,9 +1710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2f56c865d523ae478a1f97f800ae529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 346913239}
-  Offset: {x: 0.5, y: 0.25, z: 0.5}
   playerAnimator: {fileID: 1118669505}
+  grid: {fileID: 197224304}
   GM: {fileID: 763736024}
 --- !u!95 &1118669505
 Animator:
@@ -2570,6 +2572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1118669503}
+  GM: {fileID: 763736024}
   direction: 2
 --- !u!114 &2145848710
 MonoBehaviour:

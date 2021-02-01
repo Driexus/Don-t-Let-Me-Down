@@ -2,6 +2,7 @@
 public class Movement : MonoBehaviour
 {
     public Player player;
+    public GameManager GM;
 
     public enum Direction { Forward, Backward, Right, Left };
     public Direction direction;
@@ -20,6 +21,17 @@ public class Movement : MonoBehaviour
         else if (direction == Direction.Left)
             playerDirection = Vector3Int.left;
 
-        player.MoveToDirection(playerDirection);
+
+        Vector3Int targetCoords = player.GridPosition(GM.map.ActiveTilemap) + playerDirection;
+        if (GM.map.ActiveTilemap.HasTile(targetCoords))
+        {
+            player.Walk(playerDirection);
+        }
+        else
+        {
+            GM.ResetTimer();
+            player.Jump(playerDirection);
+            GM.map.NextTilemap();
+        }
     }
 }

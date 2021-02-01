@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
-    public Map map;
-    public Vector3 Offset;
     public Animator playerAnimator;
+    public Grid grid;
     public GameManager GM;
 
     private Vector3 playerWorldOffset;
@@ -18,21 +18,15 @@ public class Player : MonoBehaviour
         playerWorldOffset = transform.parent.position;
     }
 
-    public bool HasTileUnderneath
+    public bool HasTileUnderneath(Tilemap tilemap)
     {
-        get
-        {
-            Vector3Int posToCheck = map.ActiveTilemap.WorldToCell(transform.position);
-            return map.ActiveTilemap.HasTile(posToCheck);
-        }
+        Vector3Int posToCheck = tilemap.WorldToCell(transform.position);
+        return tilemap.HasTile(posToCheck);
     }
 
-    public Vector3Int GridPosition
+    public Vector3Int GridPosition(Tilemap tilemap)
     {
-        get
-        {
-            return map.ActiveTilemap.WorldToCell(transform.position);
-        }
+        return tilemap.WorldToCell(transform.position);
     }
 
     private void Update()
@@ -46,21 +40,6 @@ public class Player : MonoBehaviour
                 StopMoving();
         }
 
-    }
-
-    public void MoveToDirection(Vector3Int direction)
-    {        
-        Vector3Int targetCoords = GridPosition + direction;
-        if (map.ActiveTilemap.HasTile(targetCoords))
-        {
-            Walk(direction);
-        }
-        else
-        {
-            GM.ResetTimer();
-            Jump(direction);
-            map.NextTilemap();
-        }
     }
 
     public void MoveForSeconds(float seconds)
@@ -92,8 +71,8 @@ public class Player : MonoBehaviour
     // Realigns/Fixes the player position according to the grid -- Fixes small errors of movement
     private void AlignWithGrid()
     {
-        Vector3Int cellPos = map.ActiveTilemap.WorldToCell(transform.position);
-        Vector3 fixedPos = map.ActiveTilemap.CellToWorld(cellPos);
+        Vector3Int cellPos = grid.WorldToCell(transform.position);
+        Vector3 fixedPos = grid.CellToWorld(cellPos);
 
         transform.parent.position = fixedPos + playerWorldOffset;
     }
