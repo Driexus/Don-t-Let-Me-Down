@@ -679,7 +679,7 @@ PrefabInstance:
     - target: {fileID: 4776540136640282864, guid: 150594151bb7e674a914f471d79105fc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4776540136640282865, guid: 150594151bb7e674a914f471d79105fc,
         type: 3}
@@ -1176,10 +1176,8 @@ MonoBehaviour:
   AlterTime: 3.5
   ActiveTime: 20
   textTimer: {fileID: 1627671129}
-  WonScreen: {fileID: 1263239490}
   skipButton: {fileID: 1900900930}
   moveButtons: {fileID: 1524559388}
-  transition: {fileID: 801293959}
   lm: {fileID: 1785419622}
 --- !u!4 &763736025
 Transform:
@@ -2320,7 +2318,6 @@ MonoBehaviour:
   player: {fileID: 1118669503}
   WonScreen: {fileID: 1263239490}
   SceneTransition: {fileID: 801293959}
-  gameGrid: {fileID: 197224304}
   nextMap: {fileID: 1736692619}
 --- !u!4 &1785419623
 Transform:
