@@ -7,7 +7,6 @@ public class Map : MonoBehaviour
     private int tilemapIndex;
     private Tilemap[] tilemaps;
     public TileBase EndTile;
-    public GameObject StartingTile;
 
     public Tilemap ActiveTilemap
     {

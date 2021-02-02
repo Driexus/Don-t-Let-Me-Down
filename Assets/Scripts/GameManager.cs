@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 
@@ -23,6 +22,7 @@ public class GameManager : MonoBehaviour
     public CanvasGroup moveButtons;
 
     public LevelManager lm;
+    public Level level;
 
     private void Start()
     {
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         player.Jump(Vector3Int.up);
-        map.StartingTile.SetActive(false);
+        //map.StartingTile.SetActive(false);
         StartTimer();
     }
 
@@ -55,9 +55,17 @@ public class GameManager : MonoBehaviour
     // Should get called after every movement
     public void CheckState()
     {
-        if (!player.HasTileUnderneath(map.ActiveTilemap))
+        if (player.HasTileUnderneath(level.GoalPlatform))
+        {
+            moveButtons.interactable = false;
+            StopTimer();
+            lm.OnLevelCompleted();
+        }
+
+        else if (!player.HasTileUnderneath(map.ActiveTilemap))
         {
             floor.SetActive(false);
+            StopTimer();
             lm.OnLevelFailed();
         }
 

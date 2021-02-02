@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public Grid grid;
     public GameManager GM;
 
-    private Vector3 playerWorldOffset;
+    public Vector3 playerWorldOffset;
 
     private bool mustMove = false;
     private float moveDuration;
@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
             if (timeSinceStartedMoving >= moveDuration)
                 StopMoving();
         }
-
     }
 
     public void MoveForSeconds(float seconds)
