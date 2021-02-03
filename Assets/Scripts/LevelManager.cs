@@ -8,55 +8,59 @@ public class LevelManager : MonoBehaviour
     public Player player;
     public GameObject WonScreen;
     public Animator SceneTransition;
-    public GameObject currentLevel;
-    public GameObject nextLevel;
+   
     private Camera mainCam;
-    private int levelIndex = 1;
+    
+    private int levelIndex = 0;
+    private GameObject currentLevel;
+    private GameObject nextLevel;
 
     private void Awake()
     {
         mainCam = Camera.main;
-        nextLevel = Instantiate(Resources.Load("Levels/Level2") as GameObject);
-        nextLevel.SetActive(false);
-    }
-
-    public void OnLevelCompleted()
-    {
-        if (nextLevel == null)
-        {
-            WonScreen.SetActive(true);
-            StartCoroutine(LoadMainMenu());
-        }
-        else
-        {
-            LoadNextLevel();
-            GM.StartLevel();
-
-           /* GM.map.gameObject.SetActive(false);
-            nextMap.gameObject.SetActive(true);
-            GM.map = nextMap;
-            //ToDO: Fix Camera
-            nextMap = null;
-            GM.StartLevel();*/
-        }
+        
+        FetchNextLevel(levelIndex + 1);
+        LoadNextLevel();
     }
 
     private void LoadNextLevel()
     {
-        // TODO: fix camera
+        if (nextLevel == null)
+            return;
 
-        player.grid = nextLevel.GetComponent<Grid>();
+        if (currentLevel != null)
+            Destroy(currentLevel);
 
-        nextLevel.transform.position = player.transform.position - player.playerWorldOffset;
-        nextLevel.SetActive(true);
-        mainCam.transform.position += nextLevel.transform.position;
-        currentLevel.SetActive(false);
-        GM.map = nextLevel.GetComponentInChildren<Map>();
-        Destroy(currentLevel);
-        currentLevel = nextLevel;
+        StartCoroutine(LoadLevel(nextLevel));
+
         levelIndex++;
-        nextLevel = null;
-        nextLevel = Resources.Load("Levels/Level" + (levelIndex + 1).ToString()) as GameObject;
+        FetchNextLevel(levelIndex + 1);
+    }
+
+    private void FetchNextLevel(int l)
+    {
+        nextLevel = Resources.Load("Levels/Level" + l.ToString()) as GameObject;
+    }
+
+    private IEnumerator LoadLevel(GameObject level)
+    {
+
+        if (level == null)
+            throw new UnityException("attempting to set current level to null");
+
+        currentLevel = Instantiate(level);
+        currentLevel.transform.position = player.transform.position - player.playerWorldOffset;
+        GM.level = currentLevel.GetComponent<Level>();
+        GM.map = currentLevel.GetComponentInChildren<Map>();
+        player.grid = currentLevel.GetComponent<Grid>();
+
+        yield return StartCoroutine(MoveCamera());
+        GM.StartLevel();
+    }
+    private IEnumerator MoveCamera()
+    {
+        mainCam.transform.position += currentLevel.transform.position;
+        yield return new WaitForSeconds(1f);
     }
 
     public IEnumerator LoadMainMenu()
@@ -70,5 +74,18 @@ public class LevelManager : MonoBehaviour
     public void OnLevelFailed()
     {
         Debug.Log("Level Failed");
+    }
+
+    public void OnLevelCompleted()
+    {
+        if (nextLevel == null)
+        {
+            WonScreen.SetActive(true);
+            StartCoroutine(LoadMainMenu());
+        }
+        else
+        {
+            LoadNextLevel();
+        }
     }
 }

@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Collections;
 
 public class Map : MonoBehaviour
 {
     private int tilemapIndex;
     private Tilemap[] tilemaps;
-    public TileBase EndTile;
 
     public Tilemap ActiveTilemap
     {

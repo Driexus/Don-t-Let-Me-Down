@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartLevel();
+        //StartLevel();
     }
 
     public void StartLevel()
@@ -67,13 +67,6 @@ public class GameManager : MonoBehaviour
             floor.SetActive(false);
             StopTimer();
             lm.OnLevelFailed();
-        }
-
-        else if (map.ActiveTilemap.GetTile(player.GridPosition(map.ActiveTilemap)) == map.EndTile)
-        {
-            moveButtons.interactable = false;
-            StopTimer();
-            lm.OnLevelCompleted();
         }
     }
 
