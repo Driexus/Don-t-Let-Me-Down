@@ -7,7 +7,9 @@ public class LevelManager : MonoBehaviour
     public GameManager GM;
     public Player player;
     public GameObject WonScreen;
+    public GameObject LoseScreen;
     public Animator SceneTransition;
+    private Vector3 camOffset;
    
     private Camera mainCam;
     
@@ -18,16 +20,19 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         mainCam = Camera.main;
+        camOffset = mainCam.transform.position;
         
         FetchNextLevel(levelIndex + 1);
         LoadNextLevel();
     }
 
+    // Destroys the current level, loads the level saved to nextLevel and lastly fetches the next level
+    // If nextLevel is null it exits
     private void LoadNextLevel()
     {
         if (nextLevel == null)
             return;
-
+        
         if (currentLevel != null)
             Destroy(currentLevel);
 
@@ -37,11 +42,13 @@ public class LevelManager : MonoBehaviour
         FetchNextLevel(levelIndex + 1);
     }
 
+    // Fetches the l level from Resources/Levels and saves it nextLevel
     private void FetchNextLevel(int l)
     {
         nextLevel = Resources.Load("Levels/Level" + l.ToString()) as GameObject;
     }
 
+    // Instantiates level, fixes its transform, sets up GM, moves camera and lastly calls GM.StartLevel()
     private IEnumerator LoadLevel(GameObject level)
     {
 
@@ -57,11 +64,18 @@ public class LevelManager : MonoBehaviour
         yield return StartCoroutine(MoveCamera());
         GM.StartLevel();
     }
+
+    // Moves the camera to target position using LerpMove
     private IEnumerator MoveCamera()
     {
-        mainCam.transform.position += currentLevel.transform.position;
-        yield return new WaitForSeconds(1f);
+        LerpMove lerpMove = mainCam.GetComponent<LerpMove>();
+        lerpMove.MoveTo(currentLevel.transform.position + camOffset);
+
+        yield return null;
+        while (lerpMove.IsMoving)
+            yield return null;
     }
+
 
     public IEnumerator LoadMainMenu()
     {
@@ -73,7 +87,8 @@ public class LevelManager : MonoBehaviour
 
     public void OnLevelFailed()
     {
-        Debug.Log("Level Failed");
+        LoseScreen.SetActive(true);
+        StartCoroutine(LoadMainMenu());
     }
 
     public void OnLevelCompleted()

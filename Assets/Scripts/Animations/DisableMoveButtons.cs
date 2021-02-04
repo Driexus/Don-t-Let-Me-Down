@@ -17,9 +17,4 @@ public class DisableMoveButtons : StateMachineBehaviour
     {
         moveButtons.interactable = false;
     }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        moveButtons.interactable = true;
-    }
 }

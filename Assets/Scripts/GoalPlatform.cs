@@ -1,18 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
+[RequireComponent(typeof(Tilemap))]
 public class GoalPlatform : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Tilemap tilemap;
+
+    private void Awake()
     {
-        
+        tilemap = GetComponent<Tilemap>();
+    }
+    public bool HasTile(Vector3 targetPos)
+    {
+        Vector3Int posToCheck = tilemap.WorldToCell(targetPos);
+        return tilemap.HasTile(posToCheck);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RemoveStart()
     {
-        
+        tilemap.SetTile(new Vector3Int(0, 0, 0), null);
     }
 }

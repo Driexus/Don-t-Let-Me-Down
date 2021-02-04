@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 495781280385103080}
-  GoalPlatform: {fileID: 495781281926809806}
+  GoalPlatform: {fileID: 1836713323806858501}
   grid: {fileID: 495781281798733843}
 --- !u!1 &495781281926809801
 GameObject:

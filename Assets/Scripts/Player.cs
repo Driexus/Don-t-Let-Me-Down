@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     {
         if (mustMove)
         {
-            transform.parent.position += (transform.parent.localRotation * Vector3.forward * Time.deltaTime) /moveDuration;
+            transform.parent.position += transform.parent.localRotation * Vector3.forward * Time.deltaTime / moveDuration;
             timeSinceStartedMoving += Time.deltaTime;
 
             if (timeSinceStartedMoving >= moveDuration)
@@ -65,6 +65,11 @@ public class Player : MonoBehaviour
     {
         ApplyRotation(direction);
         playerAnimator.SetTrigger("Jump");
+    }
+
+    public void Fall()
+    {
+        playerAnimator.SetTrigger("Fall");
     }
 
     // Realigns/Fixes the player position according to the grid -- Fixes small errors of movement

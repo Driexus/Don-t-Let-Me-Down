@@ -46,8 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71a1e1cac970da4093e59627ecbaeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EndTile: {fileID: 11400000, guid: e04c9256075907d4794b948458f31854, type: 2}
-  StartingTile: {fileID: 1112254859745930288}
 --- !u!1 &1112254859745930288
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 1112254858069987345}
-  GoalPlatform: {fileID: 1112254859745930295}
+  GoalPlatform: {fileID: 1221472332991609340}
   grid: {fileID: 1112254859877573866}
 --- !u!1 &3124715536746187056
 GameObject:

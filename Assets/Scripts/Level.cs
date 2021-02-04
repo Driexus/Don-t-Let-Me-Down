@@ -4,6 +4,6 @@ using UnityEngine.Tilemaps;
 public class Level : MonoBehaviour
 {
     public Map map;
-    public Tilemap GoalPlatform;
+    public GoalPlatform GoalPlatform;
     public Grid grid;
 }

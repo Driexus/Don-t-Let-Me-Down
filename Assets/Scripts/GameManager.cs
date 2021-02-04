@@ -10,10 +10,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject floor;
 
+    // Memorization phase total repeats and time spend in each repeat
     public int Repeats;
     public float AlterTime;
 
+    // Time before the platform fails
     public int ActiveTime;
+    
     public TMP_Text textTimer;
     private IEnumerator timer = null;
     private IEnumerator memorizationPhase;
@@ -23,11 +26,6 @@ public class GameManager : MonoBehaviour
 
     public LevelManager lm;
     public Level level;
-
-    private void Start()
-    {
-        //StartLevel();
-    }
 
     public void StartLevel()
     {
@@ -46,7 +44,9 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         player.Jump(Vector3Int.up);
-        //map.StartingTile.SetActive(false);
+        
+        // Removes the starting tile after jumping -> comment this line to cheat through the levels
+        level.GoalPlatform.RemoveStart();
         StartTimer();
     }
 
@@ -55,19 +55,22 @@ public class GameManager : MonoBehaviour
     // Should get called after every movement
     public void CheckState()
     {
-        if (player.HasTileUnderneath(level.GoalPlatform))
+        //if (player.HasTileUnderneath(level.GoalPlatform))
+        if (level.GoalPlatform.HasTile(player.transform.position))
         {
-            moveButtons.interactable = false;
             StopTimer();
             lm.OnLevelCompleted();
         }
 
         else if (!player.HasTileUnderneath(map.ActiveTilemap))
         {
-            floor.SetActive(false);
             StopTimer();
+            player.Fall();
             lm.OnLevelFailed();
         }
+
+        else
+            moveButtons.interactable = true;
     }
 
     private IEnumerator StartMemorizationPhase()
