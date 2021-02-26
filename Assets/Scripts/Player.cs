@@ -39,6 +39,15 @@ public class Player : MonoBehaviour
             if (timeSinceStartedMoving >= moveDuration)
                 StopMoving();
         }
+
+        if (mustMove)
+        {
+            transform.parent.position += transform.parent.localRotation * Vector3.forward * Time.deltaTime / moveDuration;
+            timeSinceStartedMoving += Time.deltaTime;
+
+            if (timeSinceStartedMoving >= moveDuration)
+                StopMoving();
+        }
     }
 
     public void MoveForSeconds(float seconds)
