@@ -10,9 +10,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject floor;
 
-    // Memorization phase total repeats and time spend in each repeat
-    public int Repeats;
-    public float AlterTime;
+    // Memorization phase total time
+    public float MemorizationTime;
 
     // Time before the platform fails
     public int ActiveTime;
@@ -30,7 +29,6 @@ public class GameManager : MonoBehaviour
     public void StartLevel()
     {
         moveButtons.interactable = false;
-        map.LoadFirstTilemap();
         memorizationPhase = StartMemorizationPhase();
         StartCoroutine(memorizationPhase);
     }
@@ -40,7 +38,7 @@ public class GameManager : MonoBehaviour
         skipButton.enabled = false;
         
         map.LoadFirstTilemap();
-        while (!map.ActiveTilemapHasLoaded)
+        while (!map.firstTilemapHasLoaded)
             yield return null;
 
         player.Jump(Vector3Int.up);
@@ -77,12 +75,8 @@ public class GameManager : MonoBehaviour
     {
         textTimer.text = "Skip";
         skipButton.enabled = true;
-        for (int i = 1; i < Repeats * map.tilemapCount; i++)
-        {               
-                yield return new WaitForSeconds(AlterTime);
-                map.NextTilemap();
-        }
-        yield return new WaitForSeconds(AlterTime);
+        map.LoadAllTilemaps();
+        yield return new WaitForSeconds(MemorizationTime);
         StartCoroutine(StartGamePhase());
     }
 

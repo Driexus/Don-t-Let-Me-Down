@@ -9,7 +9,11 @@ public class Player : MonoBehaviour
 
     public Vector3 playerWorldOffset;
 
-    private bool mustMove = false;
+    public bool IsMoving
+    {
+        get { return isMoving; }
+    }
+    private bool isMoving = false;
     private float moveDuration;
     private float timeSinceStartedMoving;
 
@@ -31,16 +35,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (mustMove)
-        {
-            transform.parent.position += transform.parent.localRotation * Vector3.forward * Time.deltaTime / moveDuration;
-            timeSinceStartedMoving += Time.deltaTime;
-
-            if (timeSinceStartedMoving >= moveDuration)
-                StopMoving();
-        }
-
-        if (mustMove)
+        if (isMoving)
         {
             transform.parent.position += transform.parent.localRotation * Vector3.forward * Time.deltaTime / moveDuration;
             timeSinceStartedMoving += Time.deltaTime;
@@ -54,14 +49,14 @@ public class Player : MonoBehaviour
     {
         moveDuration = seconds;
         timeSinceStartedMoving = 0f;
-        mustMove = true;
+        isMoving = true;
     }
 
     private void StopMoving()
     {
-        mustMove = false;
         AlignWithGrid();
         GM.CheckState();
+        isMoving = false;
     }
 
     public void Walk(Vector3Int direction)
