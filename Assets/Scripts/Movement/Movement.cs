@@ -5,6 +5,7 @@ public class Movement : MonoBehaviour
     public Player player;
     public GameManager GM;
     private bool movedRecently;
+    public bool allowMovement;
 
     public enum Direction { Forward, Backward, Right, Left };
     public Direction direction;
@@ -21,7 +22,7 @@ public class Movement : MonoBehaviour
     public void MoveToDirection()
     {
         // If player is moving or has moved recently do not enter new commands
-        if (player.IsMoving || movedRecently)
+        if (player.IsMoving || movedRecently || !allowMovement)
             return;
         
         // Sets movedRecently to true to avoid multiple commands

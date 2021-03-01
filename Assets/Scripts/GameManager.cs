@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Map map;
 
     public GameObject floor;
+    public Movement movement;
 
     // Memorization phase total time
     public float MemorizationTime;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
             yield return null;
 
         player.Jump(Vector3Int.up);
+        movement.allowMovement = true;
         
         // Removes the starting tile after jumping -> comment this line to cheat through the levels
         level.GoalPlatform.RemoveStart();
@@ -53,15 +55,16 @@ public class GameManager : MonoBehaviour
     // Should get called after every movement
     public void CheckState()
     {
-        //if (player.HasTileUnderneath(level.GoalPlatform))
         if (level.GoalPlatform.HasTile(player.transform.position))
         {
+            movement.allowMovement = false;
             StopTimer();
             lm.OnLevelCompleted();
         }
 
         else if (!player.HasTileUnderneath(map.ActiveTilemap))
         {
+            movement.allowMovement = false;
             StopTimer();
             player.Fall();
             lm.OnLevelFailed();
