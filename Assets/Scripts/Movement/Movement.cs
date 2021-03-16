@@ -2,13 +2,18 @@
 using UnityEngine;
 public class Movement : MonoBehaviour
 {
-    public Player player;
+    Player player;
     public GameManager GM;
     private bool movedRecently;
     public bool allowMovement;
 
     public enum Direction { Forward, Backward, Right, Left };
     public Direction direction;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     // Set movedRecently to true for x number of frames after a movement has been registered to avoid multiple commands
     private IEnumerator JustMoved(int frames)

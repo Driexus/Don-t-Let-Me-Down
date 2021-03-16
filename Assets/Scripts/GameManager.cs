@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player;
+    Player player;
     public Map map;
 
     public GameObject floor;
@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
 
     public LevelManager lm;
     public Level level;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     public void StartLevel()
     {

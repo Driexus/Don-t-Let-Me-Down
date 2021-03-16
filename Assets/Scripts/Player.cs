@@ -2,11 +2,15 @@
 using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
-{
-    public Animator playerAnimator;
-    public Grid grid;
+{ 
     public GameManager GM;
+    public Animator playerAnimator;
 
+    // TODO: Switch these to private (?)
+    [HideInInspector]
+    public Grid grid;
+
+    //[HideInInspector]
     public Vector3 playerWorldOffset;
 
     public bool IsMoving
@@ -19,7 +23,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        playerWorldOffset = transform.parent.position;
+        playerWorldOffset = transform.position;
     }
 
     public bool HasTileUnderneath(Tilemap tilemap)
@@ -37,7 +41,7 @@ public class Player : MonoBehaviour
     {
         if (isMoving)
         {
-            transform.parent.position += transform.parent.localRotation * Vector3.forward * Time.deltaTime / moveDuration;
+            transform.position += transform.localRotation * Vector3.forward * Time.deltaTime / moveDuration;
             timeSinceStartedMoving += Time.deltaTime;
 
             if (timeSinceStartedMoving >= moveDuration)
@@ -82,19 +86,19 @@ public class Player : MonoBehaviour
         Vector3Int cellPos = grid.WorldToCell(transform.position);
         Vector3 fixedPos = grid.CellToWorld(cellPos);
 
-        transform.parent.position = fixedPos + playerWorldOffset;
+        transform.position = fixedPos + playerWorldOffset;
     }
 
     // Changes the rotation of the player to face a given direction
     private void ApplyRotation(Vector3Int direction)
     {
         if (direction == Vector3Int.up)
-            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
         else if (direction == Vector3Int.down)
-            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
         else if (direction == Vector3Int.right)
-            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
         else if (direction == Vector3Int.left)
-            transform.parent.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
+            transform.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
     }
 }

@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
-{
+{   
+    Player player;
     public GameManager GM;
-    public Player player;
     public GameObject WonScreen;
     public GameObject LoseScreen;
     public Animator SceneTransition;
@@ -19,10 +19,14 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         mainCam = Camera.main;
         camOffset = mainCam.transform.position;
-        
-        FetchNextLevel(levelIndex + 1);
+    }
+
+    private void Start()
+    {
+        FetchNextLevel();
         LoadNextLevel();
     }
 
@@ -39,13 +43,13 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadLevel(nextLevel));
 
         levelIndex++;
-        FetchNextLevel(levelIndex + 1);
+        FetchNextLevel();
     }
 
-    // Fetches the l level from Resources/Levels and saves it nextLevel
-    private void FetchNextLevel(int l)
+    // Fetches the [levelIndex + 1] level from Resources/Levels and saves it nextLevel
+    private void FetchNextLevel()
     {
-        nextLevel = Resources.Load("Levels/Level" + l.ToString()) as GameObject;
+        nextLevel = Resources.Load("Levels/Level" + (levelIndex + 1).ToString()) as GameObject;
     }
 
     // Instantiates level, fixes its transform, sets up GM, moves camera and lastly calls GM.StartLevel()
