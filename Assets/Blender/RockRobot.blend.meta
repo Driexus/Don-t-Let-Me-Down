@@ -20,10 +20,22 @@ ModelImporter:
     second: Armature|Jump.002
   - first:
       74: 1079665108409675491
-    second: Armature|Jump
+    second: Armature|Jump_Start
   - first:
       74: -5025487861805838091
     second: Armature|Fall
+  - first:
+      74: -445219641815187323
+    second: Armature|Jump (1)dada
+  - first:
+      74: -8407302308426460532
+    second: Armature|Jump_End
+  - first:
+      74: 1079665108409675491
+    second: Armature|Jump
+  - first:
+      74: -1862932125039169580
+    second: Armature|Jump_Start
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -53,6 +65,35 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
+      name: Armature|Fall
+      takeName: Armature|Fall
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
       name: Armature|Idle
       takeName: Armature|Idle
       internalID: 0
@@ -64,7 +105,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -93,7 +134,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -114,7 +155,36 @@ ModelImporter:
       name: Armature|Jump
       takeName: Armature|Jump
       internalID: 0
-      firstFrame: 0
+      firstFrame: 10
+      lastFrame: 31
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Armature|Jump_End
+      takeName: Armature|Jump
+      internalID: 0
+      firstFrame: 31
       lastFrame: 59
       wrapMode: 0
       orientationOffsetY: 0
@@ -140,11 +210,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: Armature|Fall
-      takeName: Armature|Fall
+      name: Armature|Jump_Start
+      takeName: Armature|Jump
       internalID: 0
       firstFrame: 0
-      lastFrame: 59
+      lastFrame: 10
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

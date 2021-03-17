@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public Grid grid;
 
-    //[HideInInspector]
+    [HideInInspector]
     public Vector3 playerWorldOffset;
 
     public bool IsMoving
