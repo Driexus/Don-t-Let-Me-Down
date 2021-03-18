@@ -57,4 +57,13 @@ public class Movement : MonoBehaviour
             GM.map.NextTilemap();
         }
     }
+
+    public void StayIdle()
+    {
+        // If player is moving or has moved recently do not enter new commands
+        if (player.IsMoving || movedRecently || !allowMovement)
+            return;
+
+        player.Idle();
+    }
 }

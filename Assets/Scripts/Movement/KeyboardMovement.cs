@@ -33,5 +33,9 @@ public class KeyboardMovement : MonoBehaviour
             movement.direction = Movement.Direction.Right;
             movement.MoveToDirection();
         }
+        else
+        {
+            movement.StayIdle();
+        }
     }
 }

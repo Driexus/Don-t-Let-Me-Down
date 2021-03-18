@@ -63,6 +63,11 @@ public class Player : MonoBehaviour
         isMoving = false;
     }
 
+    public void Idle()
+    {
+        playerAnimator.SetTrigger("Idle");
+    }
+
     public void Walk(Vector3Int direction)
     {
         ApplyRotation(direction);

@@ -1483,12 +1483,12 @@ GameObject:
   - component: {fileID: 1562167266}
   - component: {fileID: 1562167265}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Animation Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1562167265
 Animator:
   serializedVersion: 3
