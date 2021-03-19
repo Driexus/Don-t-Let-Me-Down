@@ -92,6 +92,7 @@ public class LevelManager : MonoBehaviour
     public void OnLevelFailed()
     {
         LoseScreen.SetActive(true);
+        player.gameObject.AddComponent<Rigidbody>();
         StartCoroutine(LoadMainMenu());
     }
 
@@ -104,6 +105,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
+            player.Idle(Vector3Int.up);
             LoadNextLevel();
         }
     }

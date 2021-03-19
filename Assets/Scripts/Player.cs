@@ -63,8 +63,16 @@ public class Player : MonoBehaviour
         isMoving = false;
     }
 
+    // Idle animation facing the same direction as before (default implementation)
     public void Idle()
     {
+        playerAnimator.SetTrigger("Idle");
+    }
+
+    // Idle animation facing a specific direction
+    public void Idle(Vector3Int direction)
+    {
+        ApplyRotation(direction);
         playerAnimator.SetTrigger("Idle");
     }
 
@@ -72,17 +80,20 @@ public class Player : MonoBehaviour
     {
         ApplyRotation(direction);
         playerAnimator.SetTrigger("Walk");
+        playerAnimator.ResetTrigger("Idle");
     }
 
     public void Jump(Vector3Int direction)
     {
         ApplyRotation(direction);
         playerAnimator.SetTrigger("Jump");
+        playerAnimator.ResetTrigger("Idle");
     }
 
     public void Fall()
     {
         playerAnimator.SetTrigger("Fall");
+        playerAnimator.ResetTrigger("Idle");
     }
 
     // Realigns/Fixes the player position according to the grid -- Fixes small errors of movement
@@ -105,5 +116,5 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
         else if (direction == Vector3Int.left)
             transform.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
-    }
+    }   
 }

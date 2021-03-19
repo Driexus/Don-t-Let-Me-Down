@@ -16,6 +16,11 @@ public class GoalPlatform : MonoBehaviour
         return tilemap.HasTile(posToCheck);
     }
 
+    public bool HasTile(Vector3Int targetPos)
+    {
+        return tilemap.HasTile(targetPos);
+    }
+
     public void RemoveStart()
     {
         tilemap.SetTile(new Vector3Int(0, 0, 0), null);

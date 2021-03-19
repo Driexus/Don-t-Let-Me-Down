@@ -4,10 +4,12 @@
 public class KeyboardMovement : MonoBehaviour
 {
     private Movement movement;
+    GameManager GM;
 
     private void Awake()
     {
         movement = gameObject.GetComponent<Movement>();
+        GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -37,5 +39,8 @@ public class KeyboardMovement : MonoBehaviour
         {
             movement.StayIdle();
         }
+
+        if (Input.GetKey("space"))
+            GM.SkipMemorizationPhase();
     }
 }

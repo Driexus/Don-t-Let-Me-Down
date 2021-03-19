@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartGamePhase()
     {
+        memorizationPhase = null;
         skipButton.enabled = false;
         
         map.LoadFirstTilemap();
@@ -55,24 +56,37 @@ public class GameManager : MonoBehaviour
         StartTimer();
     }
 
-
     // Checks if the player has a tile underneath or if he has won
     // Should get called after every movement
     public void CheckState()
     {
         if (level.GoalPlatform.HasTile(player.transform.position))
         {
-            movement.allowMovement = false;
             StopTimer();
             lm.OnLevelCompleted();
         }
 
         else if (!player.HasTileUnderneath(map.ActiveTilemap))
         {
-            movement.allowMovement = false;
             StopTimer();
             player.Fall();
             lm.OnLevelFailed();
+        }
+        else
+            moveButtons.interactable = true;
+    }
+
+    // Like CheckState but get called preemptively to disable movement commands before the player arrives at the tile
+    public void CheckTile(Vector3Int coords)
+    {
+        if (level.GoalPlatform.HasTile(coords))
+        {
+            movement.allowMovement = false;
+        }
+
+        else if (!map.ActiveTilemap.HasTile(coords))
+        {
+            movement.allowMovement = false;
         }
 
         else

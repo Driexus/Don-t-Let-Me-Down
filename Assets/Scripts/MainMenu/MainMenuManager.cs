@@ -17,7 +17,7 @@ public class MainMenuManager : MonoBehaviour
         while (!transition.GetCurrentAnimatorStateInfo(0).IsName("SceneLoading"))
             yield return null;
         
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game");
     }
 
     public void QuitApplication()

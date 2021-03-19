@@ -56,6 +56,7 @@ public class Movement : MonoBehaviour
             player.Jump(playerDirection);
             GM.map.NextTilemap();
         }
+        GM.CheckTile(targetCoords);
     }
 
     public void StayIdle()
