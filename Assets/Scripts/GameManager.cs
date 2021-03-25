@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     Player player;
     public Map map;
 
-    public GameObject floor;
     public Movement movement;
 
     // Memorization phase total time
@@ -22,7 +21,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator memorizationPhase;
 
     public Button skipButton;
-    public CanvasGroup moveButtons;
 
     public LevelManager lm;
     public Level level;
@@ -34,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel()
     {
-        moveButtons.interactable = false;
         memorizationPhase = StartMemorizationPhase();
         StartCoroutine(memorizationPhase);
     }
@@ -72,8 +69,6 @@ public class GameManager : MonoBehaviour
             player.Fall();
             lm.OnLevelFailed();
         }
-        else
-            moveButtons.interactable = true;
     }
 
     // Like CheckState but get called preemptively to disable movement commands before the player arrives at the tile
@@ -88,9 +83,6 @@ public class GameManager : MonoBehaviour
         {
             movement.allowMovement = false;
         }
-
-        else
-            moveButtons.interactable = true;
     }
 
     private IEnumerator StartMemorizationPhase()
@@ -126,7 +118,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         map.ActiveTilemap.gameObject.SetActive(false);
-        floor.SetActive(false);
         lm.OnLevelFailed() ;
     }
 

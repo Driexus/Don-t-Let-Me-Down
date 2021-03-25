@@ -22,17 +22,19 @@ public class LevelManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         mainCam = Camera.main;
         camOffset = mainCam.transform.position;
+
+        levelIndex = GameSceneData.Level - 1;
     }
 
     private void Start()
     {
         FetchNextLevel();
-        LoadNextLevel();
+        LoadNextLevel(false);
     }
 
     // Destroys the current level, loads the level saved to nextLevel and lastly fetches the next level
     // If nextLevel is null it exits
-    private void LoadNextLevel()
+    private void LoadNextLevel(bool moveCamera = true)
     {
         if (nextLevel == null)
             return;
@@ -40,7 +42,7 @@ public class LevelManager : MonoBehaviour
         if (currentLevel != null)
             Destroy(currentLevel);
 
-        StartCoroutine(LoadLevel(nextLevel));
+        StartCoroutine(LoadLevel(nextLevel, moveCamera));
 
         levelIndex++;
         FetchNextLevel();
@@ -52,8 +54,8 @@ public class LevelManager : MonoBehaviour
         nextLevel = Resources.Load("Levels/Level" + (levelIndex + 1).ToString()) as GameObject;
     }
 
-    // Instantiates level, fixes its transform, sets up GM, moves camera and lastly calls GM.StartLevel()
-    private IEnumerator LoadLevel(GameObject level)
+    // Instantiates level, fixes its transform, sets up GM, moves camera (if true) and lastly calls GM.StartLevel()
+    private IEnumerator LoadLevel(GameObject level, bool moveCamera)
     {
 
         if (level == null)
@@ -65,7 +67,9 @@ public class LevelManager : MonoBehaviour
         GM.map = currentLevel.GetComponentInChildren<Map>();
         player.grid = currentLevel.GetComponent<Grid>();
 
-        yield return StartCoroutine(MoveCamera());
+        if (moveCamera)
+            yield return StartCoroutine(MoveCamera());
+        
         GM.StartLevel();
     }
 
