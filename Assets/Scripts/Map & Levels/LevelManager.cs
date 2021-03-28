@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
    
     private Camera mainCam;
     
-    private int levelIndex = 0;
+    private int levelIndex = 1;
     private GameObject currentLevel;
     private GameObject nextLevel;
 
@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour
         mainCam = Camera.main;
         camOffset = mainCam.transform.position;
 
-        levelIndex = GameSceneData.Level - 1;
+        levelIndex = GameSceneData.Level;
     }
 
     private void Start()
@@ -48,10 +48,10 @@ public class LevelManager : MonoBehaviour
         FetchNextLevel();
     }
 
-    // Fetches the [levelIndex + 1] level from Resources/Levels and saves it nextLevel
+    // Fetches the [levelIndex] level from Resources/Levels and saves it nextLevel
     private void FetchNextLevel()
     {
-        nextLevel = Resources.Load("Levels/Level" + (levelIndex + 1).ToString()) as GameObject;
+        nextLevel = Resources.Load("Levels/Level" + (levelIndex).ToString()) as GameObject;
     }
 
     // Instantiates level, fixes its transform, sets up GM, moves camera (if true) and lastly calls GM.StartLevel()
@@ -102,6 +102,7 @@ public class LevelManager : MonoBehaviour
 
     public void OnLevelCompleted()
     {
+        Saver.OnLevelCompleted(levelIndex);
         if (nextLevel == null)
         {
             WonScreen.SetActive(true);

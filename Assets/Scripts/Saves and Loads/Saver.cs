@@ -35,4 +35,12 @@ public static class Saver
             return null;
         }
     }
+
+    // Gets called when a level is completed with the level index as argument
+    public static void OnLevelCompleted(int level)
+    {
+        GameData data = LoadData();
+        if (data.level < level)
+            SaveData(level);
+    }
 }

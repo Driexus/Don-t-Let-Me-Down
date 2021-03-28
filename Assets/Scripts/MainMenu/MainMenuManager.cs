@@ -5,12 +5,23 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     public Animator transition;
-    public void LoadSampleScene()
+
+    private void Awake()
     {
-        StartCoroutine(loadSampleScene());
+        // If first time opening start on level 1
+        if (PlayerPrefs.GetInt("FIRSTTIMEOPENING", 1) == 1)
+        {
+            Saver.SaveData(1);
+            PlayerPrefs.SetInt("FIRSTTIMEOPENING", 0);
+        }
     }
 
-    private IEnumerator loadSampleScene()
+    public void LoadGame()
+    {
+        StartCoroutine(loadGame());
+    }
+
+    private IEnumerator loadGame()
     {     
         // Trigger ChangeScene to fade out and then wait till we get to the SceneLoading animation to load the next scene
         transition.SetTrigger("ChangeScene");
@@ -23,5 +34,14 @@ public class MainMenuManager : MonoBehaviour
     public void QuitApplication()
     {
         Application.Quit();
+    }
+
+    // Continue from last unlocked level
+    public void ContinueLastLevel()
+    {
+        // Load the save file
+        GameData data = Saver.LoadData();
+        GameSceneData.Level = data.level;
+        LoadGame();
     }
 }
