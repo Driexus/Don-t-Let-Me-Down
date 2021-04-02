@@ -1,41 +1,64 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 
 public class RobotFace : MonoBehaviour
 {
-    public bool emptying = false;
     public RectTransform panel;
-    public RectTransform image;
-    public float timeToEmpty = 15f;
+    public Image image;
+    public Color color;
 
+    // Empties on update if true
+    public bool emptying;
+
+    [HideInInspector]
+    public float totalTime = 15f;
+    [HideInInspector]
+    public float extraTime = 5f;
+
+    // Starting Image Position
     Vector3 ImagePos;
+    
+    // Emptying speed
     float speed;
+
+    // Panel end height (Y)
     float endHeight;
+
+    // Panel start height (Y)
     float startHeight;
 
     float CurrentHeight { get { return panel.localPosition.y; } }
 
     private void Start()
     {
-        ImagePos = image.position;
-        speed = panel.rect.height / timeToEmpty;
+        ImagePos = image.transform.position;
+        speed = panel.rect.height / totalTime;
         startHeight = panel.localPosition.y;
         endHeight = panel.localPosition.y - panel.rect.height;
+
+        // Set Image Color and Sprite
+        image.color = color;
+        image.sprite = GetComponent<Image>().sprite;
     }
 
     void Update()
     {
         if (emptying)
         {
-            panel.localPosition -= Vector3.up * (speed * Time.deltaTime);
-            image.position = ImagePos;
+            // Move panel down
+            panel.localPosition -= Vector3.up * speed * Time.deltaTime;
+            // Reset image position
+            image.transform.position = ImagePos;
 
+            // Trigger OnEmpty event if panel has reached its end height postion
             if (panel.localPosition.y <= endHeight)
                 OnEmpty();
         }  
         
         if (test)
         {
-            AddTime(timetoadd);
+            AddExtraTime();
             test = false;
         }    
 
@@ -50,14 +73,15 @@ public class RobotFace : MonoBehaviour
         Debug.Log("empty");
     }
 
-    public void AddTime(float seconds)
+    // Adds the extra time. If the sum time is more than max it sets to max
+    public void AddExtraTime()
     {
-        float percentageFill = seconds / timeToEmpty;
-        float heightToAdd = seconds * speed;
+        float percentageFill = extraTime / totalTime;
+        float heightToAdd = extraTime * speed;
         if (CurrentHeight + heightToAdd > startHeight)
             heightToAdd = startHeight - CurrentHeight;
 
         panel.localPosition += Vector3.up * heightToAdd;
-        image.position = ImagePos;
+        image.transform.position = ImagePos;
     }
 }
