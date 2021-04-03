@@ -11,10 +11,18 @@ public class RobotFace : MonoBehaviour
     // Empties on update if true
     public bool emptying;
 
+    public float TotalTime
+    {
+        set
+        {
+            totalTime = value;
+            speed = panel.rect.height / totalTime;
+        }
+    }
+    float totalTime = 5f;
+
     [HideInInspector]
-    public float totalTime = 15f;
-    [HideInInspector]
-    public float extraTime = 5f;
+    public float extraTime = 2f;
 
     // Starting Image Position
     Vector3 ImagePos;
@@ -33,13 +41,16 @@ public class RobotFace : MonoBehaviour
     private void Start()
     {
         ImagePos = image.transform.position;
-        speed = panel.rect.height / totalTime;
+        TotalTime = totalTime;
         startHeight = panel.localPosition.y;
         endHeight = panel.localPosition.y - panel.rect.height;
 
         // Set Image Color and Sprite
         image.color = color;
         image.sprite = GetComponent<Image>().sprite;
+
+        // Stop emptying OnEmpty
+        OnEmpty += () => { emptying = false; };
     }
 
     void Update()
@@ -53,7 +64,7 @@ public class RobotFace : MonoBehaviour
 
             // Trigger OnEmpty event if panel has reached its end height postion
             if (panel.localPosition.y <= endHeight)
-                OnEmpty();
+                OnEmpty?.Invoke();
         }  
         
         if (test)
@@ -67,11 +78,8 @@ public class RobotFace : MonoBehaviour
     public bool test;
     public float timetoadd = 2f;
 
-    void OnEmpty()
-    {
-        emptying = false;
-        Debug.Log("empty");
-    }
+    public delegate void emptyHandler();
+    public event emptyHandler OnEmpty;
 
     // Adds the extra time. If the sum time is more than max it sets to max
     public void AddExtraTime()
@@ -84,4 +92,13 @@ public class RobotFace : MonoBehaviour
         panel.localPosition += Vector3.up * heightToAdd;
         image.transform.position = ImagePos;
     }
+
+    // Sets timer to max
+    public void ResetToMax()
+    {
+        float temp = extraTime;
+        extraTime = totalTime;
+        AddExtraTime();
+        extraTime = temp;
+    }    
 }

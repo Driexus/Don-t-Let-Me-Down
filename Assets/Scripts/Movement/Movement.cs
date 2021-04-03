@@ -52,9 +52,9 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            GM.ResetTimer();
             player.Jump(playerDirection);
             GM.map.NextTilemap();
+            GM.timer.NextTimer();
         }
         GM.CheckTile(targetCoords);
     }

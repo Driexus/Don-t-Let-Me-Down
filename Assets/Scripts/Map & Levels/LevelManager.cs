@@ -93,15 +93,21 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void OnLevelFailed()
+    public delegate void levelEventHandler();
+    public event levelEventHandler OnLevelFailed;
+
+    public void LevelFailed()
     {
+        OnLevelFailed?.Invoke();
         LoseScreen.SetActive(true);
         player.gameObject.AddComponent<Rigidbody>();
         StartCoroutine(LoadMainMenu());
     }
 
-    public void OnLevelCompleted()
+    public event levelEventHandler OnLevelCompleted;
+    public void LevelCompleted()
     {
+        OnLevelCompleted?.Invoke();
         Saver.OnLevelCompleted(levelIndex);
         if (nextLevel == null)
         {

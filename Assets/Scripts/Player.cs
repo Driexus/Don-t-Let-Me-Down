@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerWorldOffset = transform.position;
+        GM.lm.OnLevelFailed += Fall;
     }
 
     public bool HasTileUnderneath(Tilemap tilemap)

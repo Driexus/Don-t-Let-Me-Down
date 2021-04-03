@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,13 +12,15 @@ public class GameManager : MonoBehaviour
     public float MemorizationTime;
 
     // Time before the platform fails
-    public int ActiveTime;
-    
-    public TMP_Text textTimer;
-    private IEnumerator timer = null;
+    public float ActiveTime;
+
+    // Time added in each jump
+    public float extraTime;
+
     private IEnumerator memorizationPhase;
 
-    public Button skipButton;
+    // The robot faces which count time
+    public RobotTimer timer;
 
     public LevelManager lm;
     public Level level;
@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        timer.SetTimer(ActiveTime, extraTime);
     }
 
     public void StartLevel()
@@ -39,7 +44,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartGamePhase()
     {
         memorizationPhase = null;
-        skipButton.enabled = false;
         
         map.LoadFirstTilemap();
         while (!map.firstTilemapHasLoaded)
@@ -50,7 +54,7 @@ public class GameManager : MonoBehaviour
         
         // Removes the starting tile after jumping -> comment this line to cheat through the levels
         level.GoalPlatform.RemoveStart();
-        StartTimer();
+        timer.StartTimer();
     }
 
     // Checks if the player has a tile underneath or if he has won
@@ -59,15 +63,12 @@ public class GameManager : MonoBehaviour
     {
         if (level.GoalPlatform.HasTile(player.transform.position))
         {
-            StopTimer();
-            lm.OnLevelCompleted();
+            lm.LevelCompleted();
         }
 
         else if (!player.HasTileUnderneath(map.ActiveTilemap))
         {
-            StopTimer();
-            player.Fall();
-            lm.OnLevelFailed();
+            lm.LevelFailed();
         }
     }
 
@@ -87,8 +88,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartMemorizationPhase()
     {
-        textTimer.text = "Skip";
-        skipButton.enabled = true;
         map.LoadAllTilemaps();
         yield return new WaitForSeconds(MemorizationTime);
         StartCoroutine(StartGamePhase());
@@ -101,50 +100,5 @@ public class GameManager : MonoBehaviour
             StopCoroutine(memorizationPhase);
             StartCoroutine(StartGamePhase());
         }
-    }    
-
-
-    /// <summary>
-    /// Timer Logic
-    /// </summary>
-
-    private IEnumerator CountSeconds()
-    {
-        int timeTillFall = ActiveTime;
-        while (timeTillFall >= 0)
-        {
-            textTimer.text = timeTillFall.ToString();
-            timeTillFall--;
-            yield return new WaitForSeconds(1f);
-        }
-        map.ActiveTilemap.gameObject.SetActive(false);
-        lm.OnLevelFailed() ;
-    }
-
-    public void StartTimer()
-    {
-        if (timer != null)
-        {
-            Debug.LogWarning("Timer already running");
-            return;
-        }    
-
-        timer = CountSeconds();
-        StartCoroutine(timer);
-    }
-
-    public void StopTimer()
-    {
-        if (timer == null)
-            return;
-
-        StopCoroutine(timer);
-        timer = null;
-    }
-
-    public void ResetTimer()
-    {
-        StopTimer();
-        StartTimer();                 
     }
 }
