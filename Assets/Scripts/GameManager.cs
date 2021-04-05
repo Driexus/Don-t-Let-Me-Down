@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     public LevelManager lm;
     public Level level;
 
+    // Events
+    public delegate void GameManagerEventHandler();
+    public event GameManagerEventHandler OnGamePhaseStarted;
+    public event GameManagerEventHandler OnMemorizationPhaseStarted;
+    public event GameManagerEventHandler OnMemorizationPhaseEnded;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -32,7 +38,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        timer.SetTimer(ActiveTime, extraTime);
+        timer.SetTimer(ActiveTime, extraTime, MemorizationTime);
+
+        // Debug stuff
+        OnMemorizationPhaseStarted += () => Debug.Log("Mem started");
     }
 
     public void StartLevel()
@@ -43,13 +52,14 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartGamePhase()
     {
+        OnGamePhaseStarted?.Invoke();
         memorizationPhase = null;
         
         map.LoadFirstTilemap();
         while (!map.firstTilemapHasLoaded)
             yield return null;
 
-        player.Jump(Vector3Int.up);
+        yield return StartCoroutine(player.JumpAndWait(Vector3Int.up));
         movement.allowMovement = true;
         
         // Removes the starting tile after jumping -> comment this line to cheat through the levels
@@ -88,8 +98,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartMemorizationPhase()
     {
+        OnMemorizationPhaseStarted?.Invoke();
         map.LoadAllTilemaps();
         yield return new WaitForSeconds(MemorizationTime);
+        OnMemorizationPhaseEnded?.Invoke();
         StartCoroutine(StartGamePhase());
     }
 
@@ -98,6 +110,7 @@ public class GameManager : MonoBehaviour
         if (memorizationPhase != null)
         {
             StopCoroutine(memorizationPhase);
+            OnMemorizationPhaseEnded?.Invoke();
             StartCoroutine(StartGamePhase());
         }
     }

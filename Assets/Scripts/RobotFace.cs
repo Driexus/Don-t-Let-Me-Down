@@ -11,15 +11,28 @@ public class RobotFace : MonoBehaviour
     // Empties on update if true
     public bool emptying;
 
-    public float TotalTime
+    // Fills on update if true
+    public bool filling;
+
+    public float EmptyTime
     {
         set
         {
-            totalTime = value;
-            speed = panel.rect.height / totalTime;
+            emptyTime = value;
+            emptyingSpeed = panel.rect.height / emptyTime;
         }
     }
-    float totalTime = 5f;
+    float emptyTime = 5f;
+
+    public float FillTime
+    {
+        set
+        {
+            fillTime = value;
+            fillingSpeed = panel.rect.height / fillTime;
+        }
+    }
+    float fillTime = 5f;
 
     [HideInInspector]
     public float extraTime = 2f;
@@ -27,8 +40,11 @@ public class RobotFace : MonoBehaviour
     // Starting Image Position
     Vector3 ImagePos;
     
-    // Emptying speed
-    float speed;
+    // The speed which the timer depletes ingame
+    float emptyingSpeed;
+
+    // The speed which the timer fills on memorization phase
+    float fillingSpeed;
 
     // Panel end height (Y)
     float endHeight;
@@ -41,7 +57,7 @@ public class RobotFace : MonoBehaviour
     private void Start()
     {
         ImagePos = image.transform.position;
-        TotalTime = totalTime;
+        EmptyTime = emptyTime;
         startHeight = panel.localPosition.y;
         endHeight = panel.localPosition.y - panel.rect.height;
 
@@ -51,6 +67,9 @@ public class RobotFace : MonoBehaviour
 
         // Stop emptying OnEmpty
         OnEmpty += () => { emptying = false; };
+
+        // Stop filling OnFull
+        OnFull += () => { filling = false; };
     }
 
     void Update()
@@ -58,34 +77,38 @@ public class RobotFace : MonoBehaviour
         if (emptying)
         {
             // Move panel down
-            panel.localPosition -= Vector3.up * speed * Time.deltaTime;
+            panel.localPosition -= Vector3.up * emptyingSpeed * Time.deltaTime;
             // Reset image position
             image.transform.position = ImagePos;
 
-            // Trigger OnEmpty event if panel has reached its end height postion
+            // Trigger OnEmpty event if panel has reached its end height position
             if (panel.localPosition.y <= endHeight)
                 OnEmpty?.Invoke();
-        }  
-        
-        if (test)
-        {
-            AddExtraTime();
-            test = false;
-        }    
+        }
 
+        if (filling)
+        {
+            // Move panel up
+            panel.localPosition += Vector3.up * fillingSpeed * Time.deltaTime;
+            // Reset image position
+            image.transform.position = ImagePos;
+
+            // Trigger OnFull event if panel panel has reached its start height position
+            if (panel.localPosition.y >= startHeight)
+                OnFull?.Invoke();
+        }
     }
 
-    public bool test;
-    public float timetoadd = 2f;
-
-    public delegate void emptyHandler();
-    public event emptyHandler OnEmpty;
+    public delegate void RobotFaceHandler();
+    public event RobotFaceHandler OnEmpty;
+    public event RobotFaceHandler OnFull;
 
     // Adds the extra time. If the sum time is more than max it sets to max
     public void AddExtraTime()
     {
-        float percentageFill = extraTime / totalTime;
-        float heightToAdd = extraTime * speed;
+        float percentageFill = extraTime / emptyTime;
+        // Multiply with emptyingSpeed to find how much height we need to add
+        float heightToAdd = extraTime * emptyingSpeed;
         if (CurrentHeight + heightToAdd > startHeight)
             heightToAdd = startHeight - CurrentHeight;
 
@@ -93,12 +116,19 @@ public class RobotFace : MonoBehaviour
         image.transform.position = ImagePos;
     }
 
-    // Sets timer to max
+    // Sets timer to max and resets ImagePos
     public void ResetToMax()
     {
-        float temp = extraTime;
-        extraTime = totalTime;
-        AddExtraTime();
-        extraTime = temp;
-    }    
+        ImagePos = image.transform.position;
+        panel.localPosition = new Vector3(panel.localPosition.x, startHeight, panel.localPosition.z);
+        image.transform.position = ImagePos;
+    }
+
+    // Sets timer to min and resets ImagePos
+    public void ResetToMin()
+    {
+        ImagePos = image.transform.position;
+        panel.localPosition -= Vector3.up * (CurrentHeight - endHeight);
+        image.transform.position = ImagePos;
+    }
 }

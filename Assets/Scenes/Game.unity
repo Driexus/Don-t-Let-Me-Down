@@ -549,7 +549,6 @@ MonoBehaviour:
   MemorizationTime: 15
   ActiveTime: 10
   extraTime: 5
-  textTimer: {fileID: 0}
   timer: {fileID: 1183985613}
   lm: {fileID: 1785419622}
   level: {fileID: 0}

@@ -7,12 +7,18 @@ public class RobotTimer : MonoBehaviour
     // Current timer
     int robotIndex;
 
+    GameManager GM;
     LevelManager LM;
 
     private void Awake()
     {       
-        // Find Level Manager
-        LM = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+        // Find Managers
+        GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        LM = GM.lm;
+
+        // Subscribe GM events
+        GM.OnMemorizationPhaseStarted += StartFilling;
+        GM.OnMemorizationPhaseEnded += StopFilling;
 
         // Subscribe LM events
         LM.OnLevelFailed += () => robotFaces[robotIndex].emptying = false;
@@ -25,18 +31,18 @@ public class RobotTimer : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             robotFaces[i] = transform.GetChild(i).GetComponent<RobotFace>();
-            robotFaces[i].OnEmpty += TimeEnded;
             robotFaces[i].OnEmpty += LM.LevelFailed;
         }
     }
     
-    // Sets timer's total time and extra time (used when changing platform)
-    public void SetTimer(float totalTime, float extraTime)
+    // Sets timer's total time, extra time (used when changing platform) and memorization time
+    public void SetTimer(float totalTime, float extraTime, float memorizationTime)
     {
         foreach (RobotFace robotFace in robotFaces)
         {
-            robotFace.TotalTime = totalTime;
+            robotFace.EmptyTime = totalTime;
             robotFace.extraTime = extraTime;
+            robotFace.FillTime = memorizationTime;
         }
     }
 
@@ -60,13 +66,23 @@ public class RobotTimer : MonoBehaviour
         robotFaces[robotIndex].emptying = true;
     }
 
-    // OnTimeEnded event
-    public delegate void timerHandler();
-    public event timerHandler OnTimeEnded;
-
-    public void TimeEnded()
+    // Start filling all robot faces
+    public void StartFilling()
     {
-        Debug.Log("Out of Time");
-        OnTimeEnded?.Invoke();
+        foreach (RobotFace rf in robotFaces)
+        {
+            rf.ResetToMin();
+            rf.filling = true;
+        }
+    }
+
+    // Stop filling all robot faces and reset them to max
+    public void StopFilling()
+    {
+        foreach(RobotFace rf in robotFaces)
+        {
+            rf.filling = false;
+            rf.ResetToMax();
+        }
     }
 }

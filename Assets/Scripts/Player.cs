@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
@@ -117,5 +118,17 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
         else if (direction == Vector3Int.left)
             transform.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
-    }   
+    }
+
+    // Used for first jump
+    public IEnumerator JumpAndWait(Vector3Int direction)
+    {
+        Jump(direction);
+        while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            yield return null;
+        
+        Idle(direction);
+        while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            yield return null;
+    }    
 }

@@ -304,25 +304,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Fall
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Walk
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Idle
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -352,7 +352,6 @@ AnimatorState:
   - {fileID: -4553874750733589789}
   m_StateMachineBehaviours:
   - {fileID: -5752351872282276184}
-  - {fileID: -8667623122947291129}
   - {fileID: 9047899672487713551}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -514,7 +513,6 @@ AnimatorState:
   m_Transitions:
   - {fileID: 7779759311133155880}
   m_StateMachineBehaviours:
-  - {fileID: -4089200658377878817}
   - {fileID: -3274145488291536083}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
