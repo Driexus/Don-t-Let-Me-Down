@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public Vector3 playerWorldOffset;
 
+    public bool isTakingAnAction;
+
     public bool IsMoving
     {
         get { return isMoving; }
@@ -94,7 +96,7 @@ public class Player : MonoBehaviour
 
     public void Fall()
     {
-        playerAnimator.SetTrigger("Fall");
+        playerAnimator.SetBool("Fall", true);
         playerAnimator.ResetTrigger("Idle");
     }
 
@@ -125,10 +127,6 @@ public class Player : MonoBehaviour
     {
         Jump(direction);
         while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
-            yield return null;
-        
-        Idle(direction);
-        while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             yield return null;
     }    
 }

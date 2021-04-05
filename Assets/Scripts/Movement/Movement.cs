@@ -7,6 +7,9 @@ public class Movement : MonoBehaviour
     private bool movedRecently;
     public bool allowMovement;
 
+    // Controlled by AnimatorIsJumping
+    public bool isJumping;
+
     public enum Direction { Forward, Backward, Right, Left };
     public Direction direction;
 
@@ -27,7 +30,7 @@ public class Movement : MonoBehaviour
     public void MoveToDirection()
     {
         // If player is moving or has moved recently do not enter new commands
-        if (player.IsMoving || movedRecently || !allowMovement)
+        if (player.IsMoving || isJumping|| movedRecently || !allowMovement)
             return;
         
         // Sets movedRecently to true to avoid multiple commands

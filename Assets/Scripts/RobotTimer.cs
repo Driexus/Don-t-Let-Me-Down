@@ -15,7 +15,11 @@ public class RobotTimer : MonoBehaviour
         // Find Managers
         GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         LM = GM.lm;
-
+    }
+    
+    // Sets timer's total time, extra time (used when changing platform) and memorization time
+    public void SetTimer(float totalTime, float extraTime, float memorizationTime)
+    {
         // Subscribe GM events
         GM.OnMemorizationPhaseStarted += StartFilling;
         GM.OnMemorizationPhaseEnded += StopFilling;
@@ -26,23 +30,19 @@ public class RobotTimer : MonoBehaviour
 
         // Initiate array
         robotFaces = new RobotFace[transform.childCount];
-        
+
         // Initiate robot faces and subscribe events
         for (int i = 0; i < transform.childCount; i++)
         {
             robotFaces[i] = transform.GetChild(i).GetComponent<RobotFace>();
             robotFaces[i].OnEmpty += LM.LevelFailed;
         }
-    }
-    
-    // Sets timer's total time, extra time (used when changing platform) and memorization time
-    public void SetTimer(float totalTime, float extraTime, float memorizationTime)
-    {
+
         foreach (RobotFace robotFace in robotFaces)
         {
-            robotFace.EmptyTime = totalTime;
+            robotFace.emptyTime = totalTime;
             robotFace.extraTime = extraTime;
-            robotFace.FillTime = memorizationTime;
+            robotFace.fillTime = memorizationTime;
         }
     }
 

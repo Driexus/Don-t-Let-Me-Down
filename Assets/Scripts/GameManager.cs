@@ -69,17 +69,19 @@ public class GameManager : MonoBehaviour
 
     // Checks if the player has a tile underneath or if he has won
     // Should get called after every movement
-    public void CheckState()
+    // Returns true if player lost or false in any other case
+    public bool CheckState()
     {
         if (level.GoalPlatform.HasTile(player.transform.position))
         {
-            lm.LevelCompleted();
+            lm.LevelCompleted();    
         }
 
         else if (!player.HasTileUnderneath(map.ActiveTilemap))
         {
-            lm.LevelFailed();
+            return true;
         }
+        return false;
     }
 
     // Like CheckState but get called preemptively to disable movement commands before the player arrives at the tile
@@ -93,6 +95,7 @@ public class GameManager : MonoBehaviour
         else if (!map.ActiveTilemap.HasTile(coords))
         {
             movement.allowMovement = false;
+            lm.LevelFailed();
         }
     }
 

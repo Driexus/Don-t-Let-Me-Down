@@ -6,8 +6,6 @@ public class LevelManager : MonoBehaviour
 {   
     Player player;
     public GameManager GM;
-    public GameObject WonScreen;
-    public GameObject LoseScreen;
     public Animator SceneTransition;
     private Vector3 camOffset;
    
@@ -99,8 +97,6 @@ public class LevelManager : MonoBehaviour
     public void LevelFailed()
     {
         OnLevelFailed?.Invoke();
-        LoseScreen.SetActive(true);
-        player.gameObject.AddComponent<Rigidbody>();
         StartCoroutine(LoadMainMenu());
     }
 
@@ -111,7 +107,6 @@ public class LevelManager : MonoBehaviour
         Saver.OnLevelCompleted(levelIndex);
         if (nextLevel == null)
         {
-            WonScreen.SetActive(true);
             StartCoroutine(LoadMainMenu());
         }
         else
