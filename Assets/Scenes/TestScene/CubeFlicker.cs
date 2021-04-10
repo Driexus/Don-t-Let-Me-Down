@@ -4,7 +4,6 @@ public class CubeFlicker : MonoBehaviour
 {
     Renderer rend;
     Color startColor;
-    public bool flicker;
 
     float counter;
     public float flickerDuration = 0.1f;
@@ -15,35 +14,35 @@ public class CubeFlicker : MonoBehaviour
 
     float flickerTime;
 
-    private void Start()
-    {
+    private void Awake()
+    {      
         rend = GetComponent<Renderer>();
+    }
+
+    private void OnEnable()
+    {
         startColor = rend.material.GetColor("_EmissionColor");
+        counter = 0f;
 
         flickerTime = Random.Range(minimumFlickerTime, maximumFlickerTime);
     }
 
     private void Update()
-    {
-        if (flicker)
-        {            
-            counter += Time.deltaTime;
-            if (isOff && counter >= flickerDuration)
-            {
-                rend.material.SetColor("_EmissionColor", startColor);
-                isOff = !isOff;
-                counter = 0f;
-            }
-
-            else if (!isOff && counter >= flickerTime)
-            {        
-                rend.material.SetColor("_EmissionColor", Color.black);
-                isOff = !isOff;
-                counter = 0f;
-                flickerTime = Random.Range(minimumFlickerTime, maximumFlickerTime);
-            }
+    {            
+        counter += Time.deltaTime;
+        if (isOff && counter >= flickerDuration)
+        {
+            rend.material.SetColor("_EmissionColor", startColor);
+            isOff = !isOff;
+            counter = 0f;
         }
-        else
-            counter = 0;
+
+        else if (!isOff && counter >= flickerTime)
+        {        
+            rend.material.SetColor("_EmissionColor", Color.black);
+            isOff = !isOff;
+            counter = 0f;
+            flickerTime = Random.Range(minimumFlickerTime, maximumFlickerTime);
+        }
     }
 }

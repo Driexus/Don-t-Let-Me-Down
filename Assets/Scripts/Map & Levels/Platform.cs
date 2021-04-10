@@ -1,33 +1,34 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
+using DLMD.PlatformColors;
 
-[ExecuteInEditMode]
 public class Platform : MonoBehaviour
 {
-    public enum eColor { red, green, blue, purple, pink}
-    public eColor color;
+    public PlatformColor color;
     public Tilemap tilemap;
 
-    public static int S = 46, V = 87, H_red = 4, H_green = 100, H_blue = 186, H_purple = 248, H_pink = 292;
-    private int H;
+    public List<Vector3> tileWorldLocations;
 
     private void Awake()
     {
-        if (color == eColor.red)
-            H = H_red;
-        else if (color == eColor.green)
-            H = H_green;
-        else if (color == eColor.blue)
-            H = H_blue;
-        else if (color == eColor.purple)
-            H = H_purple;
-        else if (color == eColor.pink)
-            H = H_pink;
+        GameObject aplatform = Resources.Load("Platform/Ascending Platform") as GameObject;
+        GameObject acube = Resources.Load("Platform/Pretty Cube V3") as GameObject;
 
-    }
+        GameObject APlatform = Instantiate(aplatform, transform);
 
-    private void Start()
-    {
-        tilemap.color = Color.HSVToRGB((float) H/360, (float) S/100, (float) V/100);
+        foreach (var pos in tilemap.cellBounds.allPositionsWithin)
+        {
+            Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
+            Vector3 place = tilemap.CellToWorld(localPlace);
+            if (tilemap.HasTile(localPlace))
+            {
+
+                Instantiate(acube, place, acube.transform.rotation, APlatform.transform);
+            }
+        }
+
+        APlatform.GetComponent<AscendingPlatform>().SetPlatformColor(color);
+        APlatform.SetActive(true);
     }
 }
