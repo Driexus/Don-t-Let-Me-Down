@@ -45,6 +45,7 @@ public class Map : MonoBehaviour
 
     public void NextTilemap()
     {
+        Debug.Log("Next Tilemap");
         tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeOut");
         tilemapIndex++;
 
@@ -54,17 +55,22 @@ public class Map : MonoBehaviour
         tilemaps[tilemapIndex].gameObject.SetActive(true);
     }
 
-    
-    public void LoadAllTilemaps()
+    // Loads all tilemaps and waits for them
+    public IEnumerator LoadAllTilemaps()
     {
         foreach (Tilemap tilemap in tilemaps)
         {
             tilemap.gameObject.SetActive(true);
         }
+
+        AnimatorStateInfo info = tilemaps[0].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+        float seconds = info.length * info.speed;
+        yield return new WaitForSeconds(seconds);
     }
 
     public void LoadFirstTilemap()
     {
+        Debug.Log("First Tilemap");
         for (int i = 1; i < tilemapCount; i++)
             tilemaps[i].GetComponent<Animator>().SetTrigger("FadeOut");
     }

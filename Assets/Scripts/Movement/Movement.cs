@@ -49,17 +49,14 @@ public class Movement : MonoBehaviour
 
 
         Vector3Int targetCoords = player.GridPosition(GM.map.ActiveTilemap) + playerDirection;
-        if (GM.map.ActiveTilemap.HasTile(targetCoords))
+        if (GM.CheckTile(targetCoords))
         {
             player.Walk(playerDirection);
         }
         else
         {
             player.Jump(playerDirection);
-            GM.map.NextTilemap();
-            GM.timer.NextTimer();
         }
-        GM.CheckTile(targetCoords);
     }
 
     public void StayIdle()

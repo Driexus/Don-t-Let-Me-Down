@@ -17,18 +17,15 @@ public class CubeLights : MonoBehaviour
     {
         rend = GetComponent<Renderer>();
         ascendingPlatform = transform.parent.parent.gameObject.GetComponent<AscendingPlatform>();
+
+        ascendingPlatform.OnAscended += () => ResetColor();
+        ascendingPlatform.OnSkipAnimation += () => ResetColor();
     }
 
     private void OnEnable()
     {
         rend.material.SetColor("_EmissionColor", Color.black);
     }
-
-    void Start()
-    {
-        ascendingPlatform.OnAscended += () => ResetColor();
-    }
-
 
     public void ResetColor()
     {

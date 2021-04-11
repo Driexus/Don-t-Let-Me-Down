@@ -31,21 +31,26 @@ public class GameManager : MonoBehaviour
     public event GameManagerEventHandler OnMemorizationPhaseStarted;
     public event GameManagerEventHandler OnMemorizationPhaseEnded;
 
+
+    bool canSkip;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        OnMemorizationPhaseEnded += () => canSkip = false;
     }
 
     private void Start()
     {
         timer.SetTimer(ActiveTime, extraTime, MemorizationTime);
-
-        // Debug stuff
-        OnMemorizationPhaseStarted += () => Debug.Log("Mem started");
     }
 
     public void StartLevel()
     {
+        player.OnStartedJumping += () => timer.NextTimer();
+        player.OnStartedJumping += () => timer.PauseTimer();
+        player.OnEndedJumping += () => timer.ResumeTimer();
+
         memorizationPhase = StartMemorizationPhase();
         StartCoroutine(memorizationPhase);
     }
@@ -59,6 +64,9 @@ public class GameManager : MonoBehaviour
 
         yield return StartCoroutine(player.JumpAndWait(Vector3Int.up));
         movement.allowMovement = true;
+
+        player.OnStartedAscending += () => map.NextTilemap();
+        player.OnHasAscended += () => CheckState();
         
         // Removes the starting tile after jumping -> comment this line to cheat through the levels
         level.GoalPlatform.RemoveStart();
@@ -68,39 +76,44 @@ public class GameManager : MonoBehaviour
     // Checks if the player has a tile underneath or if he has won
     // Should get called after every movement
     // Returns true if player lost or false in any other case
-    public bool CheckState()
+    public void CheckState()
     {
         if (level.GoalPlatform.HasTile(player.transform.position))
         {
-            lm.LevelCompleted();    
+            lm.LevelCompleted();
+            movement.allowMovement = false;
         }
 
         else if (!player.HasTileUnderneath(map.ActiveTilemap))
         {
-            return true;
+            lm.LevelFailed();
+            movement.allowMovement = false;
         }
-        return false;
+
+        else
+            movement.allowMovement = true;
     }
 
     // Like CheckState but get called preemptively to disable movement commands before the player arrives at the tile
-    public void CheckTile(Vector3Int coords)
+    public bool CheckTile(Vector3Int coords)
     {
         if (level.GoalPlatform.HasTile(coords))
         {
-            movement.allowMovement = false;
+            return false;
         }
 
         else if (!map.ActiveTilemap.HasTile(coords))
         {
-            movement.allowMovement = false;
-            lm.LevelFailed();
+            return false;
         }
+        return true;
     }
 
     private IEnumerator StartMemorizationPhase()
     {
         OnMemorizationPhaseStarted?.Invoke();
-        map.LoadAllTilemaps();
+        yield return StartCoroutine(map.LoadAllTilemaps());
+        canSkip = true;
         yield return new WaitForSeconds(MemorizationTime);
         OnMemorizationPhaseEnded?.Invoke();
         StartCoroutine(StartGamePhase());
@@ -108,7 +121,7 @@ public class GameManager : MonoBehaviour
 
     public void SkipMemorizationPhase()
     {
-        if (memorizationPhase != null)
+        if (canSkip)
         {
             StopCoroutine(memorizationPhase);
             OnMemorizationPhaseEnded?.Invoke();

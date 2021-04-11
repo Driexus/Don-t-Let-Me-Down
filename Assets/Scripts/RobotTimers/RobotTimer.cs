@@ -7,6 +7,9 @@ public class RobotTimer : MonoBehaviour
     // Current timer
     int robotIndex;
 
+    // True when StartTimer is called, false when StopTimer is Called
+    bool isTimerActive;
+
     GameManager GM;
     LevelManager LM;
 
@@ -25,8 +28,8 @@ public class RobotTimer : MonoBehaviour
         GM.OnMemorizationPhaseEnded += StopFilling;
 
         // Subscribe LM events
-        LM.OnLevelFailed += () => robotFaces[robotIndex].emptying = false;
-        LM.OnLevelCompleted += () => robotFaces[robotIndex].emptying = false;
+        LM.OnLevelFailed += StopTimer;
+        LM.OnLevelCompleted += StopTimer;
 
         // Initiate array
         robotFaces = new RobotFace[transform.childCount];
@@ -49,13 +52,25 @@ public class RobotTimer : MonoBehaviour
     // Called to start the timer
     public void StartTimer()
     {
+        isTimerActive = true;
         robotIndex = 0;
         robotFaces[0].emptying = true;
+    }
+
+    // Called to stop the timer
+    public void StopTimer()
+    {
+        robotFaces[robotIndex].emptying = false;
+        isTimerActive = false;
     }
 
     // Jumps to the next timer
     public void NextTimer()
     {
+        // If timer is not active return
+        if (!isTimerActive)
+            return;
+
         robotFaces[robotIndex].emptying = false;
         robotFaces[robotIndex].AddExtraTime();
         
@@ -84,5 +99,19 @@ public class RobotTimer : MonoBehaviour
             rf.filling = false;
             rf.ResetToMax();
         }
+    }
+
+    // Pauses the current timer
+    public void PauseTimer()
+    {
+        if (isTimerActive)
+            robotFaces[robotIndex].emptying = false;
+    }
+
+    // Resumes the current timer
+    public void ResumeTimer()
+    {
+        if (isTimerActive)
+            robotFaces[robotIndex].emptying = true;
     }
 }

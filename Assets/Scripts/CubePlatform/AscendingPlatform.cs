@@ -3,13 +3,28 @@ using UnityEngine;
 
 public class AscendingPlatform : MonoBehaviour
 {
-    public delegate void CubePlatformEventHandler();
-    public event CubePlatformEventHandler OnAscended;
+    Animator animator;
+    public bool skipAnimation;
 
+    // Events
+    public delegate void AscendingPlatformEventHandler();
 
+    public event AscendingPlatformEventHandler OnAscended;
     public void Ascended()
     {
         OnAscended?.Invoke();
+    }
+    
+    public event AscendingPlatformEventHandler OnSkipAnimation;
+    public void SkipAnimation()
+    {
+        OnSkipAnimation?.Invoke();
+    }
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        OnSkipAnimation += () => animator.enabled = false;
     }
 
     public void SetPlatformColor(PlatformColor color)
@@ -21,5 +36,11 @@ public class AscendingPlatform : MonoBehaviour
 
         foreach (CubeLights cubeLight in cubeLights)
             cubeLight.SetPlatformColor(color);
+    }
+
+    private void OnEnable()
+    {
+        if (!skipAnimation)
+            animator.Update(0f);
     }
 }

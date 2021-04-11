@@ -21,6 +21,9 @@ public class CubePlatform : MonoBehaviour
         animator = GetComponent<Animator>();
         rend = GetComponent<Renderer>();
         ascendingPlatfom = transform.parent.parent.gameObject.GetComponent<AscendingPlatform>();
+
+        ascendingPlatfom.OnAscended += () => animator.enabled = true;
+        ascendingPlatfom.OnSkipAnimation += () => gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -29,11 +32,6 @@ public class CubePlatform : MonoBehaviour
         animator.enabled = false;
         transform.localPosition = startPos;
         ResetColor();
-    }
-
-    void Start()
-    {
-        ascendingPlatfom.OnAscended += () => animator.enabled = true;
     }
 
     public void ResetColor()

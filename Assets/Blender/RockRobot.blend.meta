@@ -29,13 +29,19 @@ ModelImporter:
     second: Armature|Jump (1)dada
   - first:
       74: -8407302308426460532
-    second: Armature|Jump_End
+    second: Armature|Descending
   - first:
       74: 1079665108409675491
-    second: Armature|Jump
+    second: Armature|Ascending
   - first:
       74: -1862932125039169580
     second: Armature|Jump_Start
+  - first:
+      74: 7727672358204898846
+    second: Armature|Jump_End
+  - first:
+      74: -1486451185627854245
+    second: Armature|Air Float
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -152,11 +158,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: Armature|Jump
+      name: Armature|Ascending
       takeName: Armature|Jump
       internalID: 0
       firstFrame: 10
-      lastFrame: 31
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -181,11 +187,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: Armature|Jump_End
+      name: Armature|Descending
       takeName: Armature|Jump
       internalID: 0
-      firstFrame: 31
-      lastFrame: 59
+      firstFrame: 51
+      lastFrame: 70
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -222,6 +228,64 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Armature|Jump_End
+      takeName: Armature|Jump
+      internalID: 0
+      firstFrame: 71
+      lastFrame: 101
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Armature|Air Float
+      takeName: Armature|Air Float
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

@@ -16,6 +16,51 @@ public class Player : MonoBehaviour
 
     public bool isTakingAnAction;
 
+    public delegate void PlayerEventHandler();
+    public event PlayerEventHandler OnStartedAscending;
+    public void StartedAscending()
+    {
+        OnStartedAscending?.Invoke();
+    }
+
+    public event PlayerEventHandler OnHasAscended;
+    public void HasAscended()
+    {
+        OnHasAscended?.Invoke();
+    }
+
+    public event PlayerEventHandler OnStartedDescending;
+    public void StartedDescending()
+    {
+        OnStartedDescending?.Invoke();
+    }
+
+    public event PlayerEventHandler OnStartedJumping;
+    public void StartedJumping()
+    {
+        OnStartedJumping?.Invoke();
+    }
+
+    public event PlayerEventHandler OnEndedJumping;
+    public void EndedJumping()
+    {
+        OnEndedJumping?.Invoke();
+    }
+
+    public event PlayerEventHandler OnStartedFalling;
+    public void StartedFalling()
+    {
+        OnStartedFalling?.Invoke();
+    }
+
+    public void ClearAllEvents()
+    {
+        OnStartedAscending = null;
+        OnHasAscended = null;
+        OnStartedJumping = null;
+        OnEndedJumping = null;
+    }
+
     public bool IsMoving
     {
         get { return isMoving; }
@@ -28,6 +73,8 @@ public class Player : MonoBehaviour
     {
         playerWorldOffset = transform.position;
         GM.lm.OnLevelFailed += Fall;
+        GM.lm.OnLevelCompleted += ClearAllEvents;
+        OnStartedFalling += () => gameObject.AddComponent<Rigidbody>();
     }
 
     public bool HasTileUnderneath(Tilemap tilemap)
@@ -63,7 +110,6 @@ public class Player : MonoBehaviour
     private void StopMoving()
     {
         AlignWithGrid();
-        GM.CheckState();
         isMoving = false;
     }
 
@@ -96,8 +142,7 @@ public class Player : MonoBehaviour
 
     public void Fall()
     {
-        playerAnimator.SetBool("Fall", true);
-        playerAnimator.ResetTrigger("Idle");
+        playerAnimator.SetTrigger("Fall");
     }
 
     // Realigns/Fixes the player position according to the grid -- Fixes small errors of movement
@@ -126,7 +171,7 @@ public class Player : MonoBehaviour
     public IEnumerator JumpAndWait(Vector3Int direction)
     {
         Jump(direction);
-        while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Ascending"))
             yield return null;
     }    
 }

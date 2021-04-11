@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 using DLMD.PlatformColors;
 
@@ -18,6 +17,13 @@ public class Platform : MonoBehaviour
 
         APlatform = Instantiate(aplatform, transform);
 
+        // Spaghetti logic
+        bool isGoal = TryGetComponent(out GoalPlatform g);
+        if (isGoal)
+        {
+            APlatform.GetComponent<AscendingPlatform>().skipAnimation = true;
+        }
+
         foreach (var pos in tilemap.cellBounds.allPositionsWithin)
         {
             Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
@@ -31,6 +37,11 @@ public class Platform : MonoBehaviour
 
         APlatform.GetComponent<AscendingPlatform>().SetPlatformColor(color);
         APlatform.SetActive(true);
+        
+        if (isGoal)
+        {
+            APlatform.GetComponent<AscendingPlatform>().SkipAnimation();
+        }
     }
 
     public void OnPlatformHasDescended()

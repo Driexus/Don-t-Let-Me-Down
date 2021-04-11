@@ -85,6 +85,7 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator LoadMainMenu()
     {
+        yield return new WaitForSeconds(2f);
         SceneTransition.speed = 0.4f;
         SceneTransition.SetTrigger("ChangeScene");
         yield return new WaitForSeconds(2.5f);
