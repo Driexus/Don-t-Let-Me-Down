@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.VFX;
 
 public class Player : MonoBehaviour
 { 
@@ -170,8 +171,32 @@ public class Player : MonoBehaviour
     // Used for first jump
     public IEnumerator JumpAndWait(Vector3Int direction)
     {
+        playerAnimator.SetTrigger("FirstJump");
         Jump(direction);
         while (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Ascending"))
             yield return null;
-    }    
+    }
+
+    /// <summary>
+    /// Visual effects stuff (flames)
+    /// </summary>
+
+    public VisualEffect thrusterRF;
+    public VisualEffect thrusterLF;
+    public VisualEffect thrusterRH;
+    public VisualEffect thrusterLH;
+
+
+    // Controls the intensity of the thrusters
+    public void SetFootThrusterIntensity( float intensity)
+    {
+        thrusterRF.SetFloat("Intensity", intensity);
+        thrusterLF.SetFloat("Intensity", intensity);
+    }
+
+    public void SetHandThrusterIntensity(float intensity)
+    {
+        thrusterRH.SetFloat("Intensity", intensity);
+        thrusterLH.SetFloat("Intensity", intensity);
+    }
 }
