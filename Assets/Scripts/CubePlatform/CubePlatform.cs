@@ -25,6 +25,7 @@ public class CubePlatform : MonoBehaviour
 
     private void OnEnable()
     {
+        rend.enabled = true;
         animator.enabled = false;
         transform.localPosition = startPos;
         ResetColor();
@@ -50,5 +51,10 @@ public class CubePlatform : MonoBehaviour
     public void SetPlatformColor(PlatformColor pColor)
     {
         color = pColor;
+    }
+
+    public void DisableRenderer()
+    {
+        rend.enabled = false;
     }
 }

@@ -8,19 +8,20 @@ public class Platform : MonoBehaviour
     public PlatformColor color;
     public Tilemap tilemap;
 
-    public List<Vector3> tileWorldLocations;
+    GameObject APlatform;
 
     private void Awake()
     {
+        gameObject.GetComponent<TilemapRenderer>().enabled = false;
         GameObject aplatform = Resources.Load("Platform/Ascending Platform") as GameObject;
         GameObject acube = Resources.Load("Platform/Pretty Cube V3") as GameObject;
 
-        GameObject APlatform = Instantiate(aplatform, transform);
+        APlatform = Instantiate(aplatform, transform);
 
         foreach (var pos in tilemap.cellBounds.allPositionsWithin)
         {
             Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
-            Vector3 place = tilemap.CellToWorld(localPlace);
+            Vector3 place = tilemap.CellToWorld(localPlace) + (Vector3.right + Vector3.forward - Vector3.up) * 0.5f;
             if (tilemap.HasTile(localPlace))
             {
 
@@ -30,5 +31,15 @@ public class Platform : MonoBehaviour
 
         APlatform.GetComponent<AscendingPlatform>().SetPlatformColor(color);
         APlatform.SetActive(true);
+    }
+
+    public void OnPlatformHasDescended()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void OnPlatformBegunDescending()
+    {
+        APlatform.GetComponent<Animator>().SetTrigger("PlatformDown");
     }
 }

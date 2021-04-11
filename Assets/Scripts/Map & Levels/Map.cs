@@ -7,6 +7,14 @@ public class Map : MonoBehaviour
     // An index pointing to the current active tilemap
     private int tilemapIndex;
     private Tilemap[] tilemaps;
+
+    public delegate void MapEventHandler();
+    public event MapEventHandler OnFirstTilemapHasLoaded;
+
+    public void FirstTilemapHasLoaded()
+    {
+        OnFirstTilemapHasLoaded?.Invoke();
+    }
     public bool firstTilemapHasLoaded;
 
     // Returns the active tilemap
@@ -43,21 +51,15 @@ public class Map : MonoBehaviour
         if (tilemapIndex >= tilemapCount)
             tilemapIndex = 0;
 
-        tilemaps[tilemapIndex].GetComponent<Animator>().SetTrigger("FadeIn");
+        tilemaps[tilemapIndex].gameObject.SetActive(true);
     }
-    public bool ActiveTilemapHasLoaded
-    {
-        get
-        {
-            return tilemaps[tilemapIndex].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AlphaOne");
-        }
-    }
+
     
     public void LoadAllTilemaps()
     {
         foreach (Tilemap tilemap in tilemaps)
         {
-            tilemap.GetComponent<Animator>().SetTrigger("FadeIn");
+            tilemap.gameObject.SetActive(true);
         }
     }
 
@@ -65,16 +67,5 @@ public class Map : MonoBehaviour
     {
         for (int i = 1; i < tilemapCount; i++)
             tilemaps[i].GetComponent<Animator>().SetTrigger("FadeOut");
-
-        StartCoroutine(CheckFirstTilemapHasLoaded());
-    }
-
-    // Checks if the other tilemaps have faded out and sets the respective bool to true
-    private IEnumerator CheckFirstTilemapHasLoaded()
-    {
-        while (!tilemaps[1].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("AlphaZero"))
-            yield return null;
-            
-        firstTilemapHasLoaded = true;
     }
 }

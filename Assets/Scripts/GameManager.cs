@@ -56,8 +56,6 @@ public class GameManager : MonoBehaviour
         memorizationPhase = null;
         
         map.LoadFirstTilemap();
-        while (!map.firstTilemapHasLoaded)
-            yield return null;
 
         yield return StartCoroutine(player.JumpAndWait(Vector3Int.up));
         movement.allowMovement = true;
