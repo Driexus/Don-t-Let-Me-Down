@@ -192,11 +192,32 @@ public class Player : MonoBehaviour
     {
         thrusterRF.SetFloat("Intensity", intensity);
         thrusterLF.SetFloat("Intensity", intensity);
+        
+        if (intensity == 0)
+            thrusterAudio.Pause();
     }
 
     public void SetHandThrusterIntensity(float intensity)
     {
         thrusterRH.SetFloat("Intensity", intensity);
         thrusterLH.SetFloat("Intensity", intensity);
+
+        if (intensity == 2f)
+            thrusterAudio.Play();
+    }
+
+    /// <summary>
+    /// Sounds
+    /// </summary>
+
+    public AudioSource movingAudio;
+    public AudioSource thrusterAudio;
+
+    public void WalkingSound(string action)
+    {
+        if (action == "pause")
+            movingAudio.Pause();
+        else if (action == ("play"))
+            movingAudio.UnPause();
     }
 }
