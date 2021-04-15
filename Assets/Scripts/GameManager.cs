@@ -4,7 +4,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     Player player;
-    public Map map;
 
     public Movement movement;
 
@@ -23,7 +22,12 @@ public class GameManager : MonoBehaviour
     public RobotTimer timer;
 
     public LevelManager lm;
+    
+    [HideInInspector]
     public Level level;
+
+    [HideInInspector]
+    public Map map;
 
     // Events
     public delegate void GameManagerEventHandler();
@@ -36,6 +40,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Reset the timescale
+        Time.timeScale = 1f;
+
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         OnMemorizationPhaseEnded += () => canSkip = false;
     }
@@ -43,6 +50,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         timer.SetTimer(ActiveTime, extraTime, MemorizationTime);
+
+        lm.OnLevelFailed += () => StartCoroutine(ReloadMenu());
     }
 
     public void StartLevel()
@@ -59,7 +68,7 @@ public class GameManager : MonoBehaviour
     {
         OnGamePhaseStarted?.Invoke();
         memorizationPhase = null;
-        
+
         map.LoadFirstTilemap();
 
         yield return StartCoroutine(player.JumpAndWait(Vector3Int.up));
@@ -67,7 +76,7 @@ public class GameManager : MonoBehaviour
 
         player.OnStartedAscending += () => map.NextTilemap();
         player.OnHasAscended += () => CheckState();
-        
+
         // Removes the starting tile after jumping -> comment this line to cheat through the levels
         level.GoalPlatform.RemoveStart();
         timer.StartTimer();
@@ -127,5 +136,39 @@ public class GameManager : MonoBehaviour
             OnMemorizationPhaseEnded?.Invoke();
             StartCoroutine(StartGamePhase());
         }
+    }
+
+    /// <summary>
+    /// Pause Menu
+    /// </summary>
+
+    public GameObject pauseMenu;
+    
+    public void PauseUnPauseGame()
+    {
+        Canvas canvas = pauseMenu.transform.parent.parent.GetComponent<Canvas>();
+        if (Time.timeScale == 1f)
+        {
+            // Make thruster particles invisible
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+        }
+            
+        else if (Time.timeScale == 0f)
+        {
+            // Make robot faces visible
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+        }
+    }
+
+    public IEnumerator ReloadMenu()
+    {
+        yield return new WaitForSeconds(4.5f);
+        PauseUnPauseGame();
+        pauseMenu.transform.Find("Resume").gameObject.SetActive(false);
+        pauseMenu.transform.Find("Reload").gameObject.SetActive(true);
     }
 }

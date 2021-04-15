@@ -42,5 +42,8 @@ public class KeyboardMovement : MonoBehaviour
 
         if (Input.GetKey("space"))
             GM.SkipMemorizationPhase();
+
+        if (Input.GetKeyDown("escape"))
+            GM.PauseUnPauseGame();
     }
 }

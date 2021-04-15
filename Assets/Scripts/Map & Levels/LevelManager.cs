@@ -82,14 +82,16 @@ public class LevelManager : MonoBehaviour
             yield return null;
     }
 
-
-    public IEnumerator LoadMainMenu()
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+    IEnumerator FadeScene()
     {
         yield return new WaitForSeconds(2f);
         SceneTransition.speed = 0.4f;
         SceneTransition.SetTrigger("ChangeScene");
-        yield return new WaitForSeconds(2.5f);
-        SceneManager.LoadScene("MainMenu");
     }
 
     public delegate void levelEventHandler();
@@ -98,7 +100,7 @@ public class LevelManager : MonoBehaviour
     public void LevelFailed()
     {
         OnLevelFailed?.Invoke();
-        StartCoroutine(LoadMainMenu());
+        StartCoroutine(FadeScene());
     }
 
     public event levelEventHandler OnLevelCompleted;
@@ -108,12 +110,17 @@ public class LevelManager : MonoBehaviour
         Saver.OnLevelCompleted(levelIndex);
         if (nextLevel == null)
         {
-            StartCoroutine(LoadMainMenu());
+            LoadMainMenu();
         }
         else
         {
             player.Idle(Vector3Int.up);
             LoadNextLevel();
         }
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
