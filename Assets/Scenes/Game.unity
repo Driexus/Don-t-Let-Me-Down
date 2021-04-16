@@ -242,17 +242,17 @@ PrefabInstance:
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
@@ -529,7 +529,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -64, y: -64}
-  m_SizeDelta: {x: 64, y: 64}
+  m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &649682858
 MonoBehaviour:
@@ -615,8 +615,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 32a6c5ab95d42a844a822b56d360c5a2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -890,7 +890,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1649,17 +1649,17 @@ PrefabInstance:
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
@@ -1694,22 +1694,22 @@ PrefabInstance:
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354856260846, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_text
-      value: 'Main Menu
+      value: 'Menu
 
 '
       objectReference: {fileID: 0}
@@ -2241,7 +2241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.24648452, g: 0.26455146, b: 0.2735849, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2775,7 +2775,7 @@ PrefabInstance:
     - target: {fileID: 1419545899016130850, guid: 33bfe8003822b3947a0151c9ff469d83,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 1419545899016130850, guid: 33bfe8003822b3947a0151c9ff469d83,
         type: 3}
@@ -3046,17 +3046,17 @@ PrefabInstance:
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 2957798354771557731, guid: b9fd3f0920d21a047b1d7010053abe69,
         type: 3}
