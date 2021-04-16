@@ -90,6 +90,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator FadeScene()
     {
         yield return new WaitForSeconds(2f);
+
         SceneTransition.speed = 0.4f;
         SceneTransition.SetTrigger("ChangeScene");
     }

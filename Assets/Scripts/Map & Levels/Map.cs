@@ -4,6 +4,8 @@ using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour
 {
+    Player player;
+
     // An index pointing to the current active tilemap
     private int tilemapIndex;
     private Tilemap[] tilemaps;
@@ -41,6 +43,23 @@ public class Map : MonoBehaviour
 
         for (int i = 0; i < tilemapCount; i++)
             tilemaps[i] = transform.GetChild(i).GetComponent<Tilemap>();
+    }
+
+    // Add RB when start falling
+    Player.PlayerEventHandler fallHandler;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        
+        fallHandler = () => gameObject.AddComponent<Rigidbody>();
+        player.OnStartedFalling += fallHandler;
+    }
+
+    // Unregister the fallHandler
+    private void OnDestroy()
+    {
+        player.OnStartedFalling -= fallHandler;
     }
 
     public void NextTilemap()
