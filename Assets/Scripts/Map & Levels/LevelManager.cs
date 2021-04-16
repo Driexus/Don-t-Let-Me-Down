@@ -82,6 +82,9 @@ public class LevelManager : MonoBehaviour
             yield return null;
     }
 
+    /// <summary>
+    /// Spaghetti different scenes and won game
+    /// </summary>
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
@@ -95,6 +98,13 @@ public class LevelManager : MonoBehaviour
         SceneTransition.SetTrigger("ChangeScene");
     }
 
+    IEnumerator WonGame()
+    {
+        yield return StartCoroutine(FadeScene());
+        LoadMainMenu();
+    }    
+
+    // Events
     public delegate void levelEventHandler();
     public event levelEventHandler OnLevelFailed;
 
@@ -109,9 +119,10 @@ public class LevelManager : MonoBehaviour
     {
         OnLevelCompleted?.Invoke();
         Saver.OnLevelCompleted(levelIndex);
+        GameSceneData.Level = levelIndex;
         if (nextLevel == null)
         {
-            LoadMainMenu();
+            StartCoroutine(WonGame());
         }
         else
         {
@@ -120,8 +131,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    // For UI button
     public void ReloadLevel()
-    {
+    {       
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

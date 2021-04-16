@@ -51,8 +51,13 @@ public class Map : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        
-        fallHandler = () => gameObject.AddComponent<Rigidbody>();
+
+        fallHandler = () =>
+        {
+            if (player.HasTileUnderneath(ActiveTilemap))
+                gameObject.AddComponent<Rigidbody>();
+        };
+
         player.OnStartedFalling += fallHandler;
     }
 
