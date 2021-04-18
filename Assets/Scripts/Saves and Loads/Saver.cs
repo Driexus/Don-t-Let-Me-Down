@@ -4,13 +4,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class Saver
 {
-    public static void SaveData(int level)
+    static string path = Application.persistentDataPath + "/save.dlmd";
+
+    public static void SaveData(GameData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/save.dlmd";
         FileStream stream = new FileStream(path, FileMode.Create);
-
-        GameData data = new GameData(level);
 
         formatter.Serialize(stream, data);
         stream.Close();
@@ -18,29 +17,23 @@ public static class Saver
 
     public static GameData LoadData()
     {
-        string path = Application.persistentDataPath + "/save.dlmd";
+        BinaryFormatter formatter = new BinaryFormatter();
+        GameData data;
+
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-
-            GameData data = formatter.Deserialize(stream) as GameData;
+            data = formatter.Deserialize(stream) as GameData;
             stream.Close();
-
-            return data;
         }
         else
         {
-            Debug.LogError("Save file not found in " + path);
-            return null;
+            FileStream stream = new FileStream(path, FileMode.Create);
+            data = new GameData();
+            formatter.Serialize(stream, data);
+            stream.Close();
         }
-    }
 
-    // Gets called when a level is completed with the level index as argument
-    public static void OnLevelCompleted(int level)
-    {
-        GameData data = LoadData();
-        if (data.level < level)
-            SaveData(level);
+        return data;
     }
 }

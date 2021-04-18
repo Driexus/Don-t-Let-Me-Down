@@ -35,6 +35,7 @@ public class LevelButton : MonoBehaviour
     public void StartLevel()
     {
         GameSceneData.Level = level;
+        GameSceneData.HighscoreEnabled = false;
         MMM.LoadGame();
     }
 }

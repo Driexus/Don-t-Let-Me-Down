@@ -96,11 +96,13 @@ public class LevelManager : MonoBehaviour
 
         SceneTransition.speed = 0.4f;
         SceneTransition.SetTrigger("ChangeScene");
+        if (!SceneTransition.GetCurrentAnimatorStateInfo(0).IsName("SceneLoading"))
+            yield return null;
     }
 
     IEnumerator WonGame()
     {
-        yield return StartCoroutine(FadeScene());
+        yield return new WaitForSeconds(4.5f);
         LoadMainMenu();
     }    
 
@@ -110,6 +112,15 @@ public class LevelManager : MonoBehaviour
 
     public void LevelFailed()
     {
+        // Add another letdown to saver
+        GameData data = Saver.LoadData();
+        data.totalLetdowns++;
+
+        if (GameSceneData.HighscoreEnabled)
+            data.letdowns++;
+
+        Saver.SaveData(data);
+
         OnLevelFailed?.Invoke();
         StartCoroutine(FadeScene());
     }
@@ -117,18 +128,38 @@ public class LevelManager : MonoBehaviour
     public event levelEventHandler OnLevelCompleted;
     public void LevelCompleted()
     {
-        OnLevelCompleted?.Invoke();
-        Saver.OnLevelCompleted(levelIndex);
         GameSceneData.Level = levelIndex;
+        GameData data = Saver.LoadData();
+
         if (nextLevel == null)
         {
+            if (GameSceneData.HighscoreEnabled)
+            {
+                if (data.letdowns < data.highscore || data.highscore < 0)
+                    data.highscore = data.letdowns;
+
+                data.highscoreLevel = 1;
+                data.letdowns = 0;
+            }
+
+            StartCoroutine(FadeScene());
             StartCoroutine(WonGame());
         }
         else
         {
             player.Idle(Vector3Int.up);
             LoadNextLevel();
+
+            if (data.level < levelIndex)
+                data.level = levelIndex;
+
+            if (GameSceneData.HighscoreEnabled && data.highscoreLevel < levelIndex)
+                data.highscoreLevel = levelIndex;
         }
+
+        Saver.SaveData(data);
+
+        OnLevelCompleted?.Invoke();
     }
 
     // For UI button
