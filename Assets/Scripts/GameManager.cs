@@ -138,9 +138,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Pause Menu
-    /// </summary>
+    #region Pause Menu
 
     public GameObject pauseMenu;
     
@@ -170,5 +168,15 @@ public class GameManager : MonoBehaviour
         PauseUnPauseGame();
         pauseMenu.transform.Find("Resume").gameObject.SetActive(false);
         pauseMenu.transform.Find("Reload").gameObject.SetActive(true);
+    }
+
+    #endregion
+
+    void StartTutorial()
+    {
+        if (PlayerPrefs.GetInt("OpenTutorial", 1) == 1)
+        {
+            PlayerPrefs.SetInt("OpenTutorial", 0);
+        }
     }
 }

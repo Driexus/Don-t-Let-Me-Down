@@ -9,7 +9,7 @@ public class StatShower : MonoBehaviour
     public string staticText;
     public string noValueText;
 
-    private void Start()
+    private void OnEnable()
     {
         statText = GetComponent<TMP_Text>();
         int value = Saver.LoadData().GetDataValue(dataType);

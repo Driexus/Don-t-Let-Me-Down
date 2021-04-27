@@ -21,9 +21,16 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void OnEnable()
+    public void Start()
     {
-        if (Saver.LoadData().highscoreLevel == 1)
+        RefreshContinueButton();
+    }
+
+    // Changes the text of continue button
+    void RefreshContinueButton()
+    {
+        GameData data = Saver.LoadData();
+        if (data.highscoreLevel == 1 && data.letdowns == 0)
             continueButton.text = "New Run";
     }
 
@@ -61,7 +68,8 @@ public class MainMenuManager : MonoBehaviour
     {
         GameData data = Saver.LoadData();
         data.highscoreLevel = 1;
+        data.letdowns = 0;
         Saver.SaveData(data);
-        continueButton.text = "New Run";
+        RefreshContinueButton();
     }
 }
