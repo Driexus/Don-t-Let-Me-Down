@@ -6,6 +6,10 @@ public class StoryTeller : MonoBehaviour
 {
     TMP_Text tmp;
 
+    // Used to discard the first delta timer addition as it causes a bug where the first line doesn't get loaded correctly
+    // More here: https://gamedev.stackexchange.com/questions/63972/first-frame-has-a-much-longer-delta-time-than-other-frames
+    bool firstFrame;
+
     [Tooltip("Active time for each line")]
     public float defaultActiveTime = 4f;
     public float fadeInTime;
@@ -31,17 +35,7 @@ public class StoryTeller : MonoBehaviour
     public StoryLine[] storyLines;
     void Awake()
     {
-        tmp = GetComponent<TMP_Text>();
-        
-        if (storyLines != null)
-        {
-            timer = 0f;
-
-            lineIndex = 0;
-            LoadLine();
-        }
-        else
-            throw new UnityException("StoryLines cannot be null");
+        tmp = GetComponent<TMP_Text>();      
     }
 
     // Transitions for the state machine behaviour (more in Update)
@@ -56,28 +50,35 @@ public class StoryTeller : MonoBehaviour
     int lineIndex;
     public int CurrentLine { get { return lineIndex; } }
 
- /*   private void OnEnable()
+    private void OnEnable()
     {
         if (storyLines != null)
         {
             timer = 0f;
+            firstFrame = true;
 
             lineIndex = 0;
             LoadLine();
         }
         else
             throw new UnityException("StoryLines cannot be null");
-    }*/
+    }
 
     void Update()
     {
-        Debug.Log(transition);
         float timeSinceLastFrame;
 
         if (useUnscaledTime)
             timeSinceLastFrame = Time.unscaledDeltaTime;
         else
             timeSinceLastFrame = Time.deltaTime;
+
+        // Avoids Awake bug where first frame's deltaTime is much bigger than usual
+        if (firstFrame)
+        {
+            timeSinceLastFrame = 0f;
+            firstFrame = false;
+        }
 
         timer += timeSinceLastFrame;
 
@@ -146,7 +147,7 @@ public class StoryTeller : MonoBehaviour
         }
     }
 
-    public void NextLine()
+    void NextLine()
     {
         timer = 0f;
         SetTmpApha(1f);
@@ -157,5 +158,11 @@ public class StoryTeller : MonoBehaviour
     void SetTmpApha(float alpha)
     {
         tmp.color += new Color(0f, 0f, 0f, alpha - tmp.color.a);
+    }
+
+    public void TryNextLine()
+    {
+        if (transition == Transition.NoTransition)
+            NextLine();
     }
 }

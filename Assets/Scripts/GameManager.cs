@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public RobotTimer timer;
 
     public LevelManager lm;
-    
+
     [HideInInspector]
     public Level level;
 
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
     #region Pause Menu
 
     public GameObject pauseMenu;
-    
+
     public void PauseUnPauseGame()
     {
         Canvas canvas = pauseMenu.transform.parent.parent.GetComponent<Canvas>();
@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
         }
-            
+
         else if (Time.timeScale == 0f)
         {
             // Make robot faces visible
@@ -171,12 +171,4 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-
-    void StartTutorial()
-    {
-        if (PlayerPrefs.GetInt("OpenTutorial", 1) == 1)
-        {
-            PlayerPrefs.SetInt("OpenTutorial", 0);
-        }
-    }
 }

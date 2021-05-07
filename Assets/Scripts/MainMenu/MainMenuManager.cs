@@ -10,12 +10,10 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
-        //PlayerPrefs.DeleteAll();
         // If first time opening start on level 1
         if (PlayerPrefs.GetInt("FIRSTTIMEOPENING", 1) == 1)
         {
-            GameData data = new GameData(24, 24, 17, 45, -1);
-            //GameData data = new GameData(1, 1, 0, 0, -1);
+            GameData data = new GameData(1, 1, 0, 0, -1);
             Saver.SaveData(data);
             PlayerPrefs.SetInt("FIRSTTIMEOPENING", 0);
         }

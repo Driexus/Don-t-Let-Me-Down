@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     private GameObject currentLevel;
     private GameObject nextLevel;
 
+    public Tutorial tutorial;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -26,6 +28,12 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        // Enable tutorial on first level
+        GM.OnMemorizationPhaseStarted += () => {
+            if (levelIndex == 1)
+                tutorial.gameObject.SetActive(true);
+        };
+       
         FetchNextLevel();
         LoadNextLevel(false);
     }
