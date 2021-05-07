@@ -32,6 +32,16 @@ public class StoryTeller : MonoBehaviour
     void Awake()
     {
         tmp = GetComponent<TMP_Text>();
+        
+        if (storyLines != null)
+        {
+            timer = 0f;
+
+            lineIndex = 0;
+            LoadLine();
+        }
+        else
+            throw new UnityException("StoryLines cannot be null");
     }
 
     // Transitions for the state machine behaviour (more in Update)
@@ -44,8 +54,9 @@ public class StoryTeller : MonoBehaviour
 
     // Current line
     int lineIndex;
+    public int CurrentLine { get { return lineIndex; } }
 
-    private void OnEnable()
+ /*   private void OnEnable()
     {
         if (storyLines != null)
         {
@@ -56,10 +67,11 @@ public class StoryTeller : MonoBehaviour
         }
         else
             throw new UnityException("StoryLines cannot be null");
-    }
+    }*/
 
     void Update()
     {
+        Debug.Log(transition);
         float timeSinceLastFrame;
 
         if (useUnscaledTime)
@@ -124,8 +136,8 @@ public class StoryTeller : MonoBehaviour
             tmp.text = storyLines[lineIndex].line;
 
             SetTmpApha(0f);
-            transition = Transition.FadeIn;
             timeout = fadeInTime;
+            transition = Transition.FadeIn;   
         }
         else
         {
@@ -138,8 +150,8 @@ public class StoryTeller : MonoBehaviour
     {
         timer = 0f;
         SetTmpApha(1f);
-        transition = Transition.FadeOut;
         timeout = fadeOutTime;
+        transition = Transition.FadeOut;
     }
 
     void SetTmpApha(float alpha)
