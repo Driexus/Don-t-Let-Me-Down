@@ -30,8 +30,11 @@ public class LevelManager : MonoBehaviour
     {
         // Enable tutorial on first level
         GM.OnMemorizationPhaseStarted += () => {
-            if (levelIndex == 1)
+            if (levelIndex == 1 && PlayerPrefs.GetInt("OpenTutorial", 1) == 1)
+            {
+                PlayerPrefs.SetInt("OpenTutorial", 0);
                 tutorial.gameObject.SetActive(true);
+            }    
         };
        
         FetchNextLevel();
