@@ -1,0 +1,1409 @@
+fileFormatVersion: 2
+guid: 8f18e22b671e37f419ef36d3ca288680
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1560714463494741727
+    second: Rule_Wood_0
+  - first:
+      213: -1063654423139747482
+    second: Rule_Wood_1
+  - first:
+      213: -5515800172345738629
+    second: Rule_Wood_2
+  - first:
+      213: 5777302413988390641
+    second: Rule_Wood_3
+  - first:
+      213: -171236933822881386
+    second: Rule_Wood_4
+  - first:
+      213: -4522588840222896207
+    second: Rule_Wood_5
+  - first:
+      213: 8577330571387156806
+    second: Rule_Wood_6
+  - first:
+      213: -7597312082563590008
+    second: Rule_Wood_7
+  - first:
+      213: 8058146774936899697
+    second: Rule_Wood_8
+  - first:
+      213: 2819999379700553840
+    second: Rule_Wood_9
+  - first:
+      213: 2766283523663561932
+    second: Rule_Wood_10
+  - first:
+      213: -2592097472237599123
+    second: Rule_Wood_11
+  - first:
+      213: -8001098608874990427
+    second: Rule_Wood_12
+  - first:
+      213: 3475149312260198890
+    second: Rule_Wood_13
+  - first:
+      213: 5256056756288236725
+    second: Rule_Wood_14
+  - first:
+      213: -1490959472713817482
+    second: Rule_Wood_15
+  - first:
+      213: -4970656218318867089
+    second: Rule_Wood_16
+  - first:
+      213: 501504274066013052
+    second: Rule_Wood_17
+  - first:
+      213: -7933365895052864968
+    second: Rule_Wood_18
+  - first:
+      213: -2542005081471001498
+    second: Rule_Wood_19
+  - first:
+      213: -4634439795411079598
+    second: Rule_Wood_20
+  - first:
+      213: 3357174588597543728
+    second: Rule_Wood_21
+  - first:
+      213: 1020948868906478825
+    second: Rule_Wood_22
+  - first:
+      213: 8099660988359838716
+    second: Rule_Wood_23
+  - first:
+      213: -6028506155902336249
+    second: Rule_Wood_24
+  - first:
+      213: 2667786596462590293
+    second: Rule_Wood_25
+  - first:
+      213: 5454491797783330674
+    second: Rule_Wood_26
+  - first:
+      213: 7191070218560454443
+    second: Rule_Wood_27
+  - first:
+      213: -7944530473636736746
+    second: Rule_Wood_28
+  - first:
+      213: -2502285908897584123
+    second: Rule_Wood_29
+  - first:
+      213: 3600099576338314840
+    second: Rule_Wood_30
+  - first:
+      213: 3274732476414084167
+    second: Rule_Wood_31
+  - first:
+      213: -5092895940911464975
+    second: Rule_Wood_32
+  - first:
+      213: 1597861957890063405
+    second: Rule_Wood_33
+  - first:
+      213: 1432406309418653981
+    second: Rule_Wood_34
+  - first:
+      213: 6111340246995129693
+    second: Rule_Wood_35
+  - first:
+      213: 4346239517420042393
+    second: Rule_Wood_36
+  - first:
+      213: -8054692301863150757
+    second: Rule_Wood_37
+  - first:
+      213: -8791630015255940347
+    second: Rule_Wood_38
+  - first:
+      213: 612521433310597105
+    second: Rule_Wood_39
+  - first:
+      213: 5064156087707687100
+    second: Rule_Wood_40
+  - first:
+      213: -940661913182433935
+    second: Rule_Wood_41
+  - first:
+      213: -7973457246890067451
+    second: Rule_Wood_42
+  - first:
+      213: 128631581394987623
+    second: Rule_Wood_43
+  - first:
+      213: -8623059272703895191
+    second: Rule_Wood_44
+  - first:
+      213: 8321957511179646675
+    second: Rule_Wood_45
+  - first:
+      213: -4267125979906420855
+    second: Rule_Wood_46
+  - first:
+      213: -8098672952345076249
+    second: Rule_Wood_47
+  - first:
+      213: 6407996103454370531
+    second: Rule_Wood_48
+  - first:
+      213: 1335685655998264804
+    second: Rule_Wood_49
+  - first:
+      213: 7325465771589174448
+    second: Rule_Wood_50
+  - first:
+      213: 1412944960028241367
+    second: Rule_Wood_0
+  - first:
+      213: -3589395665643853458
+    second: Rule_Wood_1
+  - first:
+      213: 1665718965692726219
+    second: Rule_Wood_2
+  - first:
+      213: 5666485983030750597
+    second: Rule_Wood_3
+  - first:
+      213: -6700265911868937409
+    second: Rule_Wood_4
+  - first:
+      213: 5149339541744360301
+    second: Rule_Wood_5
+  - first:
+      213: -6663087827071415920
+    second: Rule_Wood_6
+  - first:
+      213: 7624042531018441104
+    second: Rule_Wood_7
+  - first:
+      213: -9009734076653989928
+    second: Rule_Wood_8
+  - first:
+      213: 3872938651988506020
+    second: Rule_Wood_9
+  - first:
+      213: 6541538041632064252
+    second: Rule_Wood_10
+  - first:
+      213: 2345971464270179463
+    second: Rule_Wood_11
+  - first:
+      213: -6731966598593997410
+    second: Rule_Wood_12
+  - first:
+      213: 5035391711193801724
+    second: Rule_Wood_13
+  - first:
+      213: 1789820893225443443
+    second: Rule_Wood_14
+  - first:
+      213: -5744888632229489475
+    second: Rule_Wood_15
+  - first:
+      213: 7833302808039067256
+    second: Rule_Wood_16
+  - first:
+      213: 3867067612276450454
+    second: Rule_Wood_17
+  - first:
+      213: -5527613820394067217
+    second: Rule_Wood_18
+  - first:
+      213: 1229617842170095034
+    second: Rule_Wood_19
+  - first:
+      213: 3255443603312662701
+    second: Rule_Wood_20
+  - first:
+      213: -3179175721358823503
+    second: Rule_Wood_21
+  - first:
+      213: 4000222300988322365
+    second: Rule_Wood_22
+  - first:
+      213: -6109697025523273967
+    second: Rule_Wood_23
+  - first:
+      213: 6503984629201760248
+    second: Rule_Wood_24
+  - first:
+      213: -6829730946730318534
+    second: Rule_Wood_25
+  - first:
+      213: -7827751176271363597
+    second: Rule_Wood_26
+  - first:
+      213: 6672146270659718352
+    second: Rule_Wood_27
+  - first:
+      213: -5843534976183088538
+    second: Rule_Wood_28
+  - first:
+      213: 3693270171661021197
+    second: Rule_Wood_29
+  - first:
+      213: 7132379310537434043
+    second: Rule_Wood_30
+  - first:
+      213: 148794579141505507
+    second: Rule_Wood_31
+  - first:
+      213: 5453081165246866660
+    second: Rule_Wood_32
+  - first:
+      213: -2633306480409659280
+    second: Rule_Wood_33
+  - first:
+      213: -1910951142829925623
+    second: Rule_Wood_34
+  - first:
+      213: -7515460072086035439
+    second: Rule_Wood_35
+  - first:
+      213: 5962383829044721843
+    second: Rule_Wood_36
+  - first:
+      213: 2716418031306241460
+    second: Rule_Wood_37
+  - first:
+      213: -2050796053475640628
+    second: Rule_Wood_38
+  - first:
+      213: -1932877459961162117
+    second: Rule_Wood_39
+  - first:
+      213: 2334424121354689169
+    second: Rule_Wood_40
+  - first:
+      213: -7656412297963505118
+    second: Rule_Wood_41
+  - first:
+      213: -6878658421368641778
+    second: Rule_Wood_42
+  - first:
+      213: 3458586232582577282
+    second: Rule_Wood_43
+  - first:
+      213: 3143809628626021118
+    second: Rule_Wood_44
+  - first:
+      213: -7760951841278804793
+    second: Rule_Wood_45
+  - first:
+      213: 7017715081485479272
+    second: Rule_Wood_46
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 62
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Rule_Wood_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 385
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dd69ad74f9cb9310800000000000000
+      internalID: 1412944960028241367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 385
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e69a8f6d8a7ef2ec0800000000000000
+      internalID: -3589395665643853458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_2
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 385
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcbfebde292dd1710800000000000000
+      internalID: 1665718965692726219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_3
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 385
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58d274faaf663ae40800000000000000
+      internalID: 5666485983030750597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_4
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 385
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3ba46617afd303a0800000000000000
+      internalID: -6700265911868937409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_5
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 385
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b9b85e701267740800000000000000
+      internalID: 5149339541744360301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_6
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 385
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 099cd208ce4f783a0800000000000000
+      internalID: -6663087827071415920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_7
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 321
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09103ddb94a0ec960800000000000000
+      internalID: 7624042531018441104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_8
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 321
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8df8e48c79ef6f280800000000000000
+      internalID: -9009734076653989928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_9
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 321
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a5b7ac2f217fb530800000000000000
+      internalID: 3872938651988506020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_10
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 321
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf20f28b03638ca50800000000000000
+      internalID: 6541538041632064252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_11
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 321
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78ce6050e909e8020800000000000000
+      internalID: 2345971464270179463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_12
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 321
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e95920bcb004392a0800000000000000
+      internalID: -6731966598593997410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_13
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 321
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf327aa251e41e540800000000000000
+      internalID: 5035391711193801724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_14
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 257
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37066489e98b6d810800000000000000
+      internalID: 1789820893225443443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_15
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 257
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db418c90a3e0640b0800000000000000
+      internalID: -5744888632229489475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_16
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 257
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87e0d3bb66b75bc60800000000000000
+      internalID: 7833302808039067256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_17
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 257
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 694e72831859aa530800000000000000
+      internalID: 3867067612276450454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_18
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 257
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fea2fd35488f943b0800000000000000
+      internalID: -5527613820394067217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_19
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 257
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab5e704a9ea701110800000000000000
+      internalID: 1229617842170095034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_20
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 257
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da8d4c985b8ad2d20800000000000000
+      internalID: 3255443603312662701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_21
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 193
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bf6cd1868c41e3d0800000000000000
+      internalID: -3179175721358823503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_22
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 193
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3231091df4a38730800000000000000
+      internalID: 4000222300988322365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_23
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 193
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11fac640deef53ba0800000000000000
+      internalID: -6109697025523273967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_24
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 193
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ffeb288f8bc24a50800000000000000
+      internalID: 6503984629201760248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_25
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 193
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a35a5a0b3ebe731a0800000000000000
+      internalID: -6829730946730318534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_26
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 193
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f1033447cd3e5390800000000000000
+      internalID: -7827751176271363597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_27
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 193
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dcae10cea9389c50800000000000000
+      internalID: 6672146270659718352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_28
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 129
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66a490846e797eea0800000000000000
+      internalID: -5843534976183088538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_29
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 129
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d00b66147a1214330800000000000000
+      internalID: 3693270171661021197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_30
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 129
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb3ede7a13d4bf260800000000000000
+      internalID: 7132379310537434043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_31
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 129
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e1bb32a1ef901200800000000000000
+      internalID: 148794579141505507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_32
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 129
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e4a9e99d6c3dab40800000000000000
+      internalID: 5453081165246866660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_33
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 129
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 078b27a35bd947bd0800000000000000
+      internalID: -2633306480409659280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_34
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 129
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90bde7c6f00fa75e0800000000000000
+      internalID: -1910951142829925623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_35
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 65
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1142eaf02e8b3b790800000000000000
+      internalID: -7515460072086035439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_36
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 65
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b87eb0a084aeb250800000000000000
+      internalID: 5962383829044721843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_37
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 65
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b57979aec7a2b520800000000000000
+      internalID: 2716418031306241460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_38
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 65
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccabfcddadb1a83e0800000000000000
+      internalID: -2050796053475640628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_39
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 65
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b76d7a4e03a0d25e0800000000000000
+      internalID: -1932877459961162117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_40
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 65
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19a137cbe5a856020800000000000000
+      internalID: 2334424121354689169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_41
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 65
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22af3f59495feb590800000000000000
+      internalID: -7656412297963505118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_42
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e07a2174c981a80a0800000000000000
+      internalID: -6878658421368641778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_43
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 1
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28c142aaadd5fff20800000000000000
+      internalID: 3458586232582577282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_44
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 1
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efae4bb533e01ab20800000000000000
+      internalID: 3143809628626021118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_45
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 1
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ccb9ad6b6f8b4490800000000000000
+      internalID: -7760951841278804793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rule_Wood_46
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 1
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86de7d66faee36160800000000000000
+      internalID: 7017715081485479272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 52bc7ffd5a8ff9249a6c439d4cd48a85
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

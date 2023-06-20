@@ -1,104 +1,174 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player;
+    Player player;
+
+    public Movement movement;
+
+    // Memorization phase total time
+    public float MemorizationTime;
+
+    // Time before the platform fails
+    public float ActiveTime;
+
+    // Time added in each jump
+    public float extraTime;
+
+    private IEnumerator memorizationPhase;
+
+    // The robot faces which count time
+    public RobotTimer timer;
+
+    public LevelManager lm;
+
+    [HideInInspector]
+    public Level level;
+
+    [HideInInspector]
     public Map map;
-    public EventSystem eventSystem;
 
-    public GameObject StartingTile;
+    // Events
+    public delegate void GameManagerEventHandler();
+    public event GameManagerEventHandler OnGamePhaseStarted;
+    public event GameManagerEventHandler OnMemorizationPhaseStarted;
+    public event GameManagerEventHandler OnMemorizationPhaseEnded;
 
-    public int Repeats;
-    public float AlterTime;
 
-    public int ActiveTime;
-    public TMP_Text textTimer;
-    private IEnumerator timer = null;
+    bool canSkip;
+
+    private void Awake()
+    {
+        // Reset the timescale
+        Time.timeScale = 1f;
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        OnMemorizationPhaseEnded += () => canSkip = false;
+    }
 
     private void Start()
     {
-        StartCoroutine(AlternateTilemaps());
+        timer.SetTimer(ActiveTime, extraTime, MemorizationTime);
+
+        lm.OnLevelFailed += () => StartCoroutine(ReloadMenu());
     }
 
+    public void StartLevel()
+    {
+        player.OnStartedJumping += () => timer.NextTimer();
+        player.OnStartedJumping += () => timer.PauseTimer();
+        player.OnEndedJumping += () => timer.ResumeTimer();
+
+        memorizationPhase = StartMemorizationPhase();
+        StartCoroutine(memorizationPhase);
+    }
+
+    private IEnumerator StartGamePhase()
+    {
+        OnGamePhaseStarted?.Invoke();
+        memorizationPhase = null;
+
+        map.LoadFirstTilemap();
+
+        yield return StartCoroutine(player.JumpAndWait(Vector3Int.up));
+        movement.allowMovement = true;
+
+        player.OnStartedAscending += () => map.NextTilemap();
+        player.OnHasAscended += () => CheckState();
+
+        // Removes the starting tile after jumping -> comment this line to cheat through the levels
+        level.GoalPlatform.RemoveStart();
+        timer.StartTimer();
+    }
+
+    // Checks if the player has a tile underneath or if he has won
+    // Should get called after every movement
+    // Returns true if player lost or false in any other case
     public void CheckState()
     {
-        if (!player.HasTileUnderneath)
+        if (level.GoalPlatform.HasTile(player.transform.position))
         {
-            map.floor.SetActive(false);
-            StartCoroutine(ReloadLevel());
+            lm.LevelCompleted();
+            movement.allowMovement = false;
         }
 
-        else if (map.ActiveTilemap.GetTile(player.GridPosition) == map.EndTile)
+        else if (!player.HasTileUnderneath(map.ActiveTilemap))
         {
-            StopTimer();
-            Debug.Log("Won");
-            StartCoroutine(ReloadLevel());
+            lm.LevelFailed();
+            movement.allowMovement = false;
+        }
+
+        else
+            movement.allowMovement = true;
+    }
+
+    // Like CheckState but get called preemptively to disable movement commands before the player arrives at the tile
+    public bool CheckTile(Vector3Int coords)
+    {
+        if (level.GoalPlatform.HasTile(coords))
+        {
+            return false;
+        }
+
+        else if (!map.ActiveTilemap.HasTile(coords))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    private IEnumerator StartMemorizationPhase()
+    {
+        OnMemorizationPhaseStarted?.Invoke();
+        yield return StartCoroutine(map.LoadAllTilemaps());
+        canSkip = true;
+        yield return new WaitForSeconds(MemorizationTime);
+        OnMemorizationPhaseEnded?.Invoke();
+        StartCoroutine(StartGamePhase());
+    }
+
+    public void SkipMemorizationPhase()
+    {
+        if (canSkip)
+        {
+            StopCoroutine(memorizationPhase);
+            OnMemorizationPhaseEnded?.Invoke();
+            StartCoroutine(StartGamePhase());
         }
     }
 
-    public IEnumerator ReloadLevel()
-    {
-        eventSystem.enabled = false;
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    #region Pause Menu
 
-    public IEnumerator AlternateTilemaps()
+    public GameObject pauseMenu;
+
+    public void PauseUnPauseGame()
     {
-        for (int i = 0; i < Repeats; i++)
+        Canvas canvas = pauseMenu.transform.parent.parent.GetComponent<Canvas>();
+        if (Time.timeScale == 1f)
         {
-            for (int j = 0; j < map.tilemapCount; j++)
-            {
-                yield return new WaitForSeconds(AlterTime);
-                map.NextTilemap();
-            }
+            // Make thruster particles invisible
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
         }
-        StartingTile.SetActive(false);
-        StartTimer();
-    }
 
-    private IEnumerator CountSeconds()
-    {
-        int timeTillFall = ActiveTime;
-        while (timeTillFall >= 0)
+        else if (Time.timeScale == 0f)
         {
-            textTimer.text = timeTillFall.ToString();
-            timeTillFall--;
-            yield return new WaitForSeconds(1f);
+            // Make robot faces visible
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
         }
-        map.ActiveTilemap.gameObject.SetActive(false);
-        map.floor.SetActive(false);
-        StartCoroutine(ReloadLevel());
     }
 
-    public void StartTimer()
+    public IEnumerator ReloadMenu()
     {
-        if (timer != null)
-        {
-            Debug.LogWarning("Timer already running");
-            return;
-        }    
-
-        timer = CountSeconds();
-        StartCoroutine(timer);
+        yield return new WaitForSeconds(4.5f);
+        PauseUnPauseGame();
+        pauseMenu.transform.Find("Resume").gameObject.SetActive(false);
+        pauseMenu.transform.Find("Reload").gameObject.SetActive(true);
     }
 
-    public void StopTimer()
-    {
-        if (timer == null)
-            return;
-
-        StopCoroutine(timer);
-        timer = null;
-    }
-
-    public void ResetTimer()
-    {
-        StopTimer();
-        StartTimer();                 
-    }    
+    #endregion
 }
